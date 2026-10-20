@@ -837,7 +837,7 @@ button {
   bottom: 0;
   left: 50%;
   translate: -50% 0;
-  width: min(32%, 400px);
+  width: clamp(300px, 32%, 400px);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -851,8 +851,10 @@ button {
     var(--ink);
   border-inline: 10px solid #26303d;
 }
+/* height: auto keeps the logo's proportions; the width/height attributes alone squash it. */
 .poster-ad img {
   width: 46%;
+  height: auto;
 }
 .poster-kicker {
   font-size: 10px;
@@ -882,6 +884,7 @@ button {
   border: 1px solid rgba(255, 255, 255, 0.4);
   border-radius: 999px;
   font-size: 10.5px;
+  white-space: nowrap;
 }
 .bites {
   position: relative;
@@ -929,7 +932,15 @@ button {
     aspect-ratio: 1.15 / 1;
   }
   .poster-ad {
-    width: 62%;
+    width: 84%;
+    padding: 20px 12px;
+    border-inline-width: 8px;
+  }
+  .poster-ad img {
+    width: 52%;
+  }
+  .poster-url {
+    font-size: clamp(9.5px, 2.9vw, 11px);
   }
   .bites {
     grid-template-columns: 1fr;
