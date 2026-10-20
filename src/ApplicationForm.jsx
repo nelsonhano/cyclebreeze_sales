@@ -373,14 +373,14 @@ export default function ApplicationForm({ closed }) {
 
         <div className="form-nav">
           {step > 0 ? (
-            <button type="button" className="btn btn-ghost" onClick={() => goTo(step - 1)}>
+            <button type="button" className="kz-btn outline" onClick={() => goTo(step - 1)}>
               <ArrowLeft size={17} aria-hidden="true" /> Back
             </button>
           ) : (
             <span />
           )}
           <p className="form-saved">Your answers are saved on this device as you go.</p>
-          <button type="submit" className="btn btn-primary" disabled={status === 'submitting'}>
+          <button type="submit" className="kz-btn" disabled={status === 'submitting'}>
             {last ? (
               status === 'submitting' ? (
                 <>
