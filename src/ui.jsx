@@ -1,45 +1,48 @@
 import {
   ArrowRight,
   Bot,
-  BotOff,
   BriefcaseBusiness,
-  Clock,
-  Handshake,
+  Building2,
+  ChartColumn,
+  FileCheck,
+  Funnel,
+  LayoutTemplate,
+  Lightbulb,
+  ListChecks,
   Megaphone,
   MessageCircle,
-  MessagesSquare,
   Receipt,
-  Rocket,
+  RefreshCw,
+  Search,
   ShieldCheck,
-  Sparkles,
-  Star,
   Target,
-  Trophy,
-  Zap,
+  TrendingUp,
+  User,
+  Workflow,
+  Wrench,
 } from 'lucide-react'
-import { CONFIG } from './content.js'
-import { scallopCircle } from './shapes.js'
-
-const STICKER_PATH = scallopCircle(14, 40)
-const ARROW_PATH = scallopCircle(12, 44)
 
 const ICONS = {
-  whatsapp: MessageCircle,
   bot: Bot,
-  botoff: BotOff,
   briefcase: BriefcaseBusiness,
-  message: MessagesSquare,
-  target: Target,
-  handshake: Handshake,
-  trophy: Trophy,
-  receipt: Receipt,
-  clock: Clock,
-  shield: ShieldCheck,
-  rocket: Rocket,
+  building: Building2,
+  chart: ChartColumn,
+  filecheck: FileCheck,
+  funnel: Funnel,
+  layout: LayoutTemplate,
+  lightbulb: Lightbulb,
+  listchecks: ListChecks,
   megaphone: Megaphone,
-  star: Star,
-  sparkles: Sparkles,
-  zap: Zap,
+  message: MessageCircle,
+  receipt: Receipt,
+  refresh: RefreshCw,
+  search: Search,
+  shield: ShieldCheck,
+  target: Target,
+  trending: TrendingUp,
+  user: User,
+  workflow: Workflow,
+  wrench: Wrench,
 }
 
 export function Icon({ name, ...props }) {
@@ -47,85 +50,28 @@ export function Icon({ name, ...props }) {
   return C ? <C aria-hidden="true" {...props} /> : null
 }
 
-// `*word*` → script accent, `[WORD]` → tilted ink tag. Lines split on \n.
-export function Headline({ as: Tag = 'h2', text, className = '', mascot }) {
+export function SectionHead({ eyebrow, title, intro, center = false, light = false, id }) {
   return (
-    <Tag className={`kz-title ${className}`}>
-      {text.split('\n').map((line, i) => (
-        <span className="kz-line" key={i}>
-          {i === 1 && mascot}
-          {line.split(/(\*[^*]+\*|\[[^\]]+\])/).map((part, j) => {
-            if (part.startsWith('*')) return <em key={j}>{part.slice(1, -1)}</em>
-            if (part.startsWith('['))
-              return (
-                <span className="tag-word" key={j}>
-                  {part.slice(1, -1)}
-                </span>
-              )
-            return part
-          })}
-        </span>
-      ))}
-    </Tag>
+    <header className={`section-head ${center ? 'center' : ''} ${light ? 'light' : ''}`} data-reveal>
+      {eyebrow && <p className="eyebrow">{eyebrow}</p>}
+      <h2 id={id}>{title}</h2>
+      {intro && <p className="section-intro">{intro}</p>}
+    </header>
   )
 }
 
-// Small tilted stamp above section titles.
-export function Stamp({ children, tone = 'blue' }) {
-  return (
-    <span className={`stamp stamp-${tone}`} data-reveal>
-      {children}
-    </span>
-  )
-}
-
-export function Scallop({ className = '', bumps = 22, children, ...rest }) {
-  return (
-    <div className={`scallop ${className}`} {...rest}>
-      <svg viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
-        <path d={scallopCircle(bumps, 46)} />
-      </svg>
-      <div className="scallop-body">{children}</div>
-    </div>
-  )
-}
-
-// Round scalloped sticker holding an icon (or short text).
-export function Sticker({ icon, text, tone = 'green', className = '', style }) {
-  return (
-    <span className={`sticker-badge tone-${tone} ${className}`} style={style} aria-hidden="true">
-      <svg className="sb-shape" viewBox="0 0 100 100">
-        <path className="sb-outline" d={STICKER_PATH} />
-        <path className="sb-fill" d={STICKER_PATH} />
-      </svg>
-      {text ? <b>{text}</b> : <Icon name={icon} strokeWidth={2.4} />}
-    </span>
-  )
-}
-
-function ArrowBadge() {
-  return (
-    <span className="arrow-badge" aria-hidden="true">
-      <svg viewBox="0 0 100 100">
-        <path d={ARROW_PATH} />
-      </svg>
-      <ArrowRight size={13} strokeWidth={3} />
-    </span>
-  )
-}
-
-export function ApplyButton({ closed, label = 'Apply now', variant = '', className = '', href = CONFIG.applyUrl }) {
-  if (closed && href === CONFIG.applyUrl) {
+export function ApplyButton({ closed, label = 'Apply Now', className = '', href = '#apply' }) {
+  if (closed) {
     return (
-      <span className={`kz-btn is-disabled ${variant} ${className}`} aria-disabled="true">
+      <span className={`btn btn-primary is-disabled ${className}`} aria-disabled="true">
         Applications closed
       </span>
     )
   }
   return (
-    <a className={`kz-btn ${variant} ${className}`} href={href}>
+    <a className={`btn btn-primary ${className}`} href={href}>
       {label}
-      <ArrowBadge />
+      <ArrowRight size={17} aria-hidden="true" />
     </a>
   )
 }

@@ -1,247 +1,229 @@
-// Everything on the page is sourced from CycleBreeze_Commercial_Growth_Challenge_Updated.md
-// (dates, money, rules) and the applicant pack (capabilities, WhatsApp, AI standard).
-// The public page must never show winner targets, scoring weights/keys or Bizzie admin data.
-//
-// Headline syntax: lines split on \n, *word* = script accent, [WORD] = tilted ink tag.
+// Page copy, taken word for word from the developer brief for the
+// CycleBreeze Commercial Growth Challenge landing page.
 
 export const CONFIG = {
-  // Swap for the live form URL once the developer ships it (PHP/CSV form with server-side cut-off).
-  applyUrl:
-    'mailto:sales@cyclebreeze.com?subject=Application%20%E2%80%94%20Commercial%20Growth%20Challenge',
+  // Google Apps Script web app URL that saves applications to the Google Sheet.
+  // Setup steps live in docs/google-sheets-setup.md. Leave empty until it is deployed.
+  formEndpoint: '',
   email: 'sales@cyclebreeze.com',
-  // Fri 23 Oct, 11:59 PM WAT (UTC+1)
+  website: 'https://www.cyclebreeze.com',
+  // Fri 23 Oct 2026, 11:59 PM WAT (UTC+1)
   deadline: '2026-10-23T23:59:00+01:00',
+  deadlineLabel: 'Friday, 23 October 2026, 11:59 PM WAT',
 }
 
 export const NAV = [
-  { href: '#mandates', label: 'Mandate' },
-  { href: '#tracks', label: 'Tracks' },
-  { href: '#trial', label: 'Live trial' },
-  { href: '#faq', label: 'FAQ' },
-  { href: '#rules', label: 'Rules' },
+  { href: '#about', label: 'The challenge' },
+  { href: '#tracks', label: 'Who should apply' },
+  { href: '#process', label: 'Selection process' },
+  { href: '#benefits', label: 'Benefits' },
+  { href: '#prepare', label: 'Before you apply' },
 ]
 
 export const HERO = {
-  badge: 'Now selecting: sales & growth lead',
-  title: 'We don’t hire on\n*charm* we hire\non [receipts]',
-  lede: 'A cash seed, a five-day live trial on real CycleBreeze assets, and a winner chosen on verified results — not proposals.',
-}
-
-// Fanned cards under the hero. `img` cards use real CycleBreeze photography/product shots;
-// the rest are brand-colour cards with a sticker icon.
-export const HERO_CARDS = [
-  { caption: 'Winning B2B clients for software', img: '/photos/team.webp', pos: '40% 50%' },
-  { caption: 'Growing Bizzie users who stay', img: '/photos/bizzie.webp', pos: '78% 40%', dark: true },
-  { caption: 'Click-to-WhatsApp that converts', icon: 'whatsapp', tone: 'green' },
-  { caption: 'Closing deals, collecting cash', img: '/photos/developer.webp', pos: '50% 35%', dark: true },
-  { caption: 'Using AI, with human checks', icon: 'bot', tone: 'blue' },
-  { caption: 'Doing more with ₦0', img: '/photos/erp.webp', pos: '50% 20%', dark: true },
-]
-
-export const PROBLEM = {
-  title: 'Leads aren’t the\ngoal. [cash is]',
-  poster: { kicker: 'Commercial Growth Challenge', line1: 'Got ₦50,000?', line2: 'grow it.' },
-  cards: [
-    {
-      title: 'Beyond\n*likes & reach*',
-      body: 'A lead or a sign-up is not the goal. A paid deal and an active user are. We need sales and marketing run end to end — strategy to cash collected.',
-    },
-    {
-      title: 'Proposals\n*are* cheap',
-      body: 'Candidates apply, prove they can do the work, then use a small cash seed in a short live trial. Like the parable of the talents: trusted with a little, judged on what you grow.',
-    },
+  eyebrow: 'Call for proposals',
+  title: 'CycleBreeze Commercial Growth Challenge',
+  subtitle: 'Sales, Marketing & Commercial Growth Partners Wanted',
+  question: 'Can you turn strategy into qualified prospects, paying customers, and measurable revenue?',
+  body: [
+    'CycleBreeze is inviting qualified firms and individual professionals to participate in a performance-focused trial to help grow our technology services and Bizzie product.',
+    'We are looking for people who can execute, measure outcomes, learn quickly, and build practical systems that generate commercial results.',
   ],
 }
 
-export const MANDATES = [
-  {
-    id: 'b2b',
-    tab: 'CycleBreeze B2B',
-    short: 'B2B',
-    icon: 'briefcase',
-    title: 'Win B2B\nclients',
-    points: ['Websites, apps & custom software', 'SaaS, branding & digital marketing', 'Meetings → proposals → collected cash'],
-    img: '/photos/team.webp',
-    pos: '45% 50%',
-    sticker: 'handshake',
-  },
-  {
-    id: 'bizzie',
-    tab: 'Bizzie growth',
-    short: 'Bizzie',
-    icon: 'message',
-    title: 'Grow\nBizzie',
-    points: ['WhatsApp-first users who sign up', 'Activation and repeat use — not raw sign-ups', 'Conversion to paid Pro plans'],
-    img: '/photos/bizzie.webp',
-    pos: '15% 50%',
-    sticker: 'whatsapp',
-    link: { href: 'https://usebizzie.com', label: 'usebizzie.com' },
-  },
-  {
-    id: 'bar',
-    tab: 'What we look for',
-    short: 'The bar',
-    icon: 'target',
-    title: 'Prove\nit',
-    points: ['Results with numbers someone can check', 'An edge, and wins built on little', 'AI used openly, with human checks', 'Replies, daily logs, deadlines met'],
-    img: '/photos/developer.webp',
-    pos: '50% 30%',
-    sticker: 'trophy',
-  },
-]
-
-export const NOT_FOR = [
-  { quote: 'My campaign got amazing engagement. Isn’t that the point?', who: 'The poster', note: 'measured only on likes' },
-  { quote: 'I got you 400 leads. What happens next isn’t my job.', who: 'The ads operator', note: 'can’t explain lead quality' },
-  { quote: 'Trust me, the pipeline is looking great.', who: 'The salesperson', note: 'can’t document a pipeline' },
-  { quote: 'Here’s a screenshot. Don’t ask where it came from.', who: 'The inflator', note: 'bought followers, fuzzy numbers' },
-]
-
-export const DEAL = {
-  stats: [
-    { n: 50, prefix: '₦', suffix: 'k', label: 'seed per individual' },
-    { n: 100, prefix: '₦', suffix: 'k', label: 'seed per company' },
-    { n: 750, prefix: '₦', suffix: 'k', label: 'top winner payment' },
-    { n: 5, suffix: '%', label: 'commission on cash' },
+export const ABOUT = {
+  title: 'What Is the Commercial Growth Challenge?',
+  intro:
+    'The CycleBreeze Commercial Growth Challenge is designed to identify capable commercial partners who can turn business opportunities into measurable results.',
+  lead: 'The challenge focuses on two primary outcomes:',
+  outcomes: [
+    {
+      icon: 'briefcase',
+      title: 'B2B Sales and Revenue',
+      body: 'Identify and qualify relevant business prospects, develop effective sales approaches, convert qualified prospects into paying CycleBreeze clients, and generate revenue for our technology services.',
+    },
+    {
+      icon: 'trending',
+      title: 'Bizzie Product Growth',
+      body: 'Help relevant users discover and activate Bizzie, continue using the product, and convert into paid subscriptions or other approved revenue-generating actions.',
+    },
   ],
+  note: 'We are not evaluating applicants on lead volume, registrations, impressions, or activity alone. We want to understand whether their work produces qualified opportunities, meaningful conversions, and measurable commercial value.',
 }
-
-export const TIMELINE = [
-  { stage: 'Apply & prove', body: 'Form and assessment, together', date: '17–23 Oct' },
-  { stage: 'Score', body: 'Two blind reviewers · top 15 told by 6 PM', date: '24 Oct' },
-  { stage: 'Defend & verify', body: 'Live defence, references, NDA', date: '24–25 Oct' },
-  { stage: 'Select & fund', body: 'Agreement, ID check, seed paid', date: '25 Oct' },
-  { stage: 'Live trial', body: 'Go-live Monday, close Friday', date: '26–30 Oct' },
-  { stage: 'Audit', body: 'Call-backs, re-checks, ledgers', date: '31 Oct – 1 Nov' },
-  { stage: 'Announce', body: 'Winners, scorecards, appeals open', date: '2 Nov' },
-]
 
 export const TRACKS = [
   {
-    id: 'individual',
-    name: 'Individuals',
-    sub: 'For operators who carry a number alone',
-    price: '₦50,000',
-    unit: 'seed',
-    save: 'Up to 10',
-    get: [
-      '₦500,000 after success',
-      '5% commission on cash you bring',
-      'A sales & growth job at CycleBreeze',
-      'Reports to the Head of Sales',
+    id: 'firms',
+    label: 'Track A',
+    icon: 'building',
+    title: 'Firms and Agencies',
+    body: 'For established or emerging marketing, sales, and commercial growth firms that can demonstrate relevant capabilities and propose an execution team.',
+    allocation: '₦100,000',
+  },
+  {
+    id: 'individuals',
+    label: 'Track B',
+    icon: 'user',
+    title: 'Individual Professionals',
+    body: 'For independent sales professionals, growth marketers, business development specialists, performance marketers, and other qualified practitioners.',
+    allocation: '₦50,000',
+  },
+]
+
+export const TRACKS_NOTE = {
+  selection: 'CycleBreeze intends to select up to 10 firms and 10 individual professionals for the trial stage.',
+  conditions:
+    'Trial allocations are available only to shortlisted applicants selected for trial execution and are subject to the trial rules and an approved execution plan. Applying does not guarantee selection or a long-term engagement.',
+  specialists: 'Specialist providers may apply under the most appropriate track and should clearly state their specialisation.',
+}
+
+export const DELIVER = {
+  title: 'We Value Execution, Not Just Ideas.',
+  intro: 'Selected applicants may be expected to demonstrate capabilities such as:',
+  items: [
+    { icon: 'target', text: 'Identifying and prioritising suitable target markets.' },
+    { icon: 'lightbulb', text: 'Building clear offers and commercial propositions.' },
+    { icon: 'search', text: 'Prospect research, qualification, and outreach.' },
+    { icon: 'funnel', text: 'Sales pipeline management and consistent follow-up.' },
+    { icon: 'megaphone', text: 'Paid advertising and other appropriate acquisition campaigns.' },
+    { icon: 'message', text: 'WhatsApp and other approved customer acquisition channels.' },
+    { icon: 'layout', text: 'Landing pages, conversion optimisation, and funnel design.' },
+    { icon: 'workflow', text: 'CRM setup, reporting, workflow automation, and AI-enabled execution.' },
+    { icon: 'chart', text: 'Transparent reporting on costs, outcomes, and lessons learned.' },
+  ],
+  note: 'These are examples of relevant capabilities, not mandatory services that every applicant must offer. Applicants should state their strongest areas honestly.',
+}
+
+export const STEPS = [
+  {
+    title: 'Submit Your Application',
+    body: 'Complete the application form with your professional details, capabilities, relevant experience, evidence of results, and proposed approach.',
+  },
+  {
+    title: 'Screening and Review',
+    body: 'CycleBreeze will assess applications based on relevant experience, evidence, capability, proposed costs, execution quality, and suitability for the opportunity.',
+  },
+  {
+    title: 'Shortlisting and Validation',
+    body: 'Shortlisted applicants may be asked to attend interviews, provide references, demonstrate their work, or submit additional evidence.',
+  },
+  {
+    title: 'Trial Selection and Planning',
+    body: 'Selected applicants will receive further information about the trial, applicable rules, approved execution plan, and allocation terms.',
+  },
+  {
+    title: 'Performance Evaluation',
+    body: 'Trial performance will be assessed on commercial outcomes, quality of execution, accountability, transparency, and responsible use of resources.',
+  },
+  {
+    title: 'Potential Ongoing Collaboration',
+    body: 'Strong performers may be considered for longer-term collaboration, subject to mutual agreement and separate written terms.',
+  },
+]
+
+export const STEPS_NOTE = 'Selection for the trial does not guarantee a job, contract, or ongoing engagement.'
+
+export const LOOK_FOR = [
+  { icon: 'trending', text: 'Proven commercial results.' },
+  { icon: 'filecheck', text: 'Clear evidence and honest attribution.' },
+  { icon: 'listchecks', text: 'Strong execution and follow-through.' },
+  { icon: 'wrench', text: 'Practical, resourceful problem-solving.' },
+  { icon: 'receipt', text: 'Transparent costing and reporting.' },
+  { icon: 'bot', text: 'Responsible use of AI and automation.' },
+  { icon: 'shield', text: 'Ethical customer acquisition practices.' },
+  { icon: 'refresh', text: 'Ability to learn, adapt, and improve performance.' },
+]
+
+export const BENEFITS = {
+  eyebrow: 'What selected participants stand to gain',
+  title: 'More Than a Trial. An Opportunity to Build, Grow and Earn.',
+  intro:
+    'The CycleBreeze Commercial Growth Challenge is an opportunity to demonstrate your capabilities, deliver measurable commercial results, and position yourself for a potential long-term partnership with CycleBreeze.',
+  columns: ['For Individual Professionals', 'For Firms and Agencies'],
+  // Each row pairs the matching benefit for individuals and for firms.
+  rows: [
+    [
+      {
+        title: 'Potential Paid Engagement',
+        body: 'Opportunity to receive a base salary or agreed contract remuneration, with performance-based commission where applicable.',
+      },
+      {
+        title: 'Potential Commercial Contracts',
+        body: 'Opportunity to secure paid service engagements with agreed remuneration and performance-linked incentives where mutually agreed.',
+      },
     ],
-    take: ['Six assessment modules', '30-minute live defence', '4 hours a day during the trial', 'Lighter paperwork, same bar'],
-  },
-  {
-    id: 'company',
-    name: 'Companies',
-    sub: 'For agencies and firms that deliver as a team',
-    price: '₦100,000',
-    unit: 'seed',
-    save: 'Up to 10',
-    featured: true,
-    get: [
-      '₦750,000 after success',
-      '5% commission on cash you bring',
-      'A retained Growth Partner contract',
-      'Ongoing work across our services',
-      'Overseen by the Head of Sales',
+    [
+      {
+        title: 'Meaningful Projects',
+        body: 'Work on real technology, business development, and digital product growth initiatives.',
+      },
+      {
+        title: 'Ongoing Business Opportunities',
+        body: 'Potential to work on CycleBreeze’s technology services, products, and approved client projects.',
+      },
     ],
-    take: [
-      'Ten assessment modules',
-      '45-minute live defence',
-      'Named delivery team',
-      'Evidence dossier & proposal',
-      'More proof and more work',
+    [
+      {
+        title: 'Tools and Systems',
+        body: 'Potential access to company-funded tools, resources, and operational systems required for approved work.',
+      },
+      {
+        title: 'Operational Leverage',
+        body: 'Opportunity to work within CycleBreeze’s existing tools, systems, and business ecosystem, subject to approved access.',
+      },
     ],
-  },
-  {
-    id: 'runners',
-    name: 'Runners-up',
-    sub: 'Places 2 and 3 in each track',
-    price: 'Contracts',
-    unit: '',
-    save: 'Both tracks',
-    get: [
-      'Individuals: 3-month paid contracts',
-      'Companies: preferred-vendor panel',
-      'Every finisher: a written reference',
+    [
+      {
+        title: 'Career and Growth Opportunities',
+        body: 'Demonstrate your ability to drive sales, acquire customers, and deliver measurable revenue and user growth.',
+      },
+      {
+        title: 'Long-Term Partnership Potential',
+        body: 'Position your firm for continued collaboration by demonstrating reliable execution and measurable results.',
+      },
     ],
-    take: ['Pass every gate', 'Rank 2nd or 3rd in your track', 'Scorecard + 5-day appeal window'],
-  },
-]
+  ],
+  integrity:
+    'We value integrity as much as performance. Misleading claims, fabricated metrics, fake engagement, unauthorised use of data, and unapproved spending may result in disqualification.',
+}
 
-export const LANES = ['B2B acquisition', 'WhatsApp & product growth', 'Channels & partnerships', 'Content & community', 'Growth operations']
+export const PREPARE = {
+  title: 'Before You Apply',
+  intro: 'Applicants should be ready to provide:',
+  items: [
+    'Their contact and professional details.',
+    'Relevant projects and verifiable results.',
+    'A clear explanation of their personal contribution to those results.',
+    'Their strongest service areas and capability limits.',
+    'Tools, resources, and distribution channels they can lawfully access.',
+    'An execution plan and transparent cost proposal.',
+    'A breakdown of what they can deliver without additional professional fees and what requires a paid budget.',
+    'Their availability and preferred engagement model.',
+    'Their reporting, accountability, and data protection practices.',
+  ],
+  firms:
+    'For firms, the application should also identify the proposed account lead, delivery team, roles, availability, and relevant evidence of results.',
+  note: 'The full requirements will be collected through the application form.',
+}
 
-export const VERIFIED_VALUE = [
-  { outcome: 'Activated Bizzie user', how: 'Joined with your code, onboarded, used a core feature on two separate days', value: '₦2,000' },
-  { outcome: 'Qualified B2B lead', how: 'A decision-maker who confirms on our call-back — need, budget band, timeline', value: '₦8,000' },
-  { outcome: 'Meeting held', how: 'Discovery or demo with a qualified lead, attended and logged', value: '₦30,000' },
-  { outcome: 'Proposal sent', how: 'To a qualified lead after a meeting, at proposal value only', value: '₦60,000' },
-  { outcome: 'Cash collected', how: 'Money received from a deal or paid Pro plan you originated', value: 'Face value' },
-]
+export const NOTICE = {
+  title: 'Important Information for Applicants',
+  items: [
+    'The trial is an evaluation exercise.',
+    'Trial allocations are conditional on selection and an approved plan.',
+    'Applications do not guarantee selection, reimbursement beyond the stated allocation, or a long-term contract.',
+    'Ongoing remuneration, commission, performance fees, scope, tool access, and other engagement terms will be agreed separately in writing.',
+    'Applicants must not contact customers, spend funds, launch campaigns, access or use CycleBreeze/client data, or make public claims on behalf of CycleBreeze without written approval and an agreed scope.',
+    'CycleBreeze may verify references, request demonstrations or supporting evidence, and disqualify misleading submissions.',
+  ],
+}
 
-export const RULES = [
-  { title: 'Tracking', body: 'A unique code in every link and WhatsApp message. First code wins.' },
-  { title: 'No collisions', body: 'Ad audiences by random draw; prospects held 30 days in a shared registry.' },
-  { title: 'Approval first', body: 'Every ad, script and message approved — we reply within 4 working hours.' },
-  { title: 'Speed', body: 'Answer leads within 2 hours. Daily log by 5 PM. Check-ins Tue & Thu.' },
-]
-
-export const JUDGING = [
-  'Verified results',
-  'Return on Talent',
-  'Systems & AI leverage',
-  'Consistency',
-  'Integrity & character',
-  'Strategy & 90-day plan',
-]
-
-export const GATES = ['Integrity audit passed', 'Traceable attribution', 'No breach of conduct', 'Return on Talent ≥ 2.0']
-
-export const FAQS = [
-  {
-    q: 'Does it cost anything to apply?',
-    a: 'No. Applying is free and your own money is never required. We will never ask you to pay to apply, be shortlisted or receive the seed — anything that does is not from us.',
-  },
-  {
-    q: 'Is the seed my pay?',
-    a: 'No. The seed (₦50,000 individuals, ₦100,000 companies) is cash in advance for approved costs: ad spend, tools, lawful data, creative and outreach. Not for paying yourself, buying followers or leads, gifts or personal costs. It is paid by Sun 25 Oct after the signed agreement and ID check.',
-  },
-  {
-    q: 'What if I spend it honestly and it doesn’t work?',
-    a: 'Honest spend that didn’t work is not clawed back. Every naira needs a receipt and unspent funds are returned within 3 working days. Fabrication means a full return and disqualification.',
-  },
-  {
-    q: 'Can I use AI and automation?',
-    a: 'Yes — it’s expected. Disclose what you use, check its output and answer for every error. No confidential records go into third-party AI tools without authorisation.',
-  },
-  {
-    q: 'I’m great at one channel, not all. Should I apply?',
-    a: 'Yes. Name your strongest lanes, your limits and what you’d partner on. A specialist can win on one lane; a generalist must show how every function is covered.',
-  },
-  {
-    q: 'How do you stop candidates clashing?',
-    a: 'Paid audiences are assigned by random draw, B2B prospects are claimed in a shared registry with a 30-day hold, and a Do-Not-Contact list protects existing clients and partners.',
-  },
-  {
-    q: 'Is a job or contract guaranteed?',
-    a: 'No. Nothing is promised until an agreement is signed, and if nobody clears the minimum bar in a track we don’t appoint in that track.',
-  },
-  {
-    q: 'Who do I contact?',
-    a: 'sales@cyclebreeze.com. Questions are answered for all applicants within 24 hours without naming who asked. Only that address and one official WhatsApp number speak for us.',
-  },
-]
-
-// Draggable laptop stickers; clicking one shows its rule in the pill above the lid.
-export const STICKERS = [
-  { id: 'truth', kind: 'text', text: 'Say only what you can do', tone: 'green', x: 62, y: 12, r: -6, rule: 'Overclaiming loses points. Admitting a gap loses none.' },
-  { id: 'receipt', kind: 'badge', icon: 'receipt', tone: 'blue', x: 9, y: 14, r: -8, rule: 'Every naira of the seed needs a receipt.' },
-  { id: 'bot', kind: 'badge', icon: 'botoff', tone: 'ink', x: 38, y: 10, r: 6, rule: 'Fake leads or bot users end the application.' },
-  { id: 'ai', kind: 'text', text: 'AI: yes. Hidden AI: no.', tone: 'ink', x: 8, y: 56, r: 5, rule: 'AI is expected — and must be disclosed and checked.' },
-  { id: 'free', kind: 'badge', icon: 'free', tone: 'green', x: 30, y: 40, r: -4, rule: 'Applying is free. We never ask you to pay.' },
-  { id: 'clock', kind: 'badge', icon: 'clock', tone: 'teal', x: 80, y: 58, r: 9, rule: 'Reply within 12 hours. Two missed deadlines = withdrawal.' },
-  { id: 'consent', kind: 'text', text: 'Opt-in only', tone: 'blue', x: 50, y: 70, r: -3, rule: 'No unsolicited bulk messaging or scraped data (NDPA).' },
-  { id: 'claims', kind: 'badge', icon: 'shield', tone: 'blue', x: 86, y: 18, r: 4, rule: 'No unapproved claims on price, scope or timelines.' },
-]
+export const CTA = {
+  title: 'Ready to Demonstrate What You Can Deliver?',
+  body: [
+    'If you have the experience, practical skills, and commercial discipline to turn opportunities into measurable results, we invite you to apply.',
+    'Complete the application and pre-screening form to tell us what you can deliver, how you work, and why you are a strong fit for the challenge.',
+  ],
+  support:
+    'The application form will ask about your experience, results, capabilities, costs, proposed execution approach, and availability.',
+}
