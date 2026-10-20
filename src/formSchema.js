@@ -37,7 +37,10 @@ const project = (n) => ({
   id: `project${n}`,
   type: 'fieldset',
   label: `Project ${n}`,
-  help: n === 1 ? 'Delivered in the last 24 to 36 months. You may anonymise the client name.' : undefined,
+  help:
+    n === 1
+      ? 'Delivered in the last 24 to 36 months. You may anonymise the client name.'
+      : 'Kindly fill Nil for places with no answer if you do not have an additional project.',
   fields: [
     { id: `p${n}_name`, type: 'text', label: 'Project or client, and year', required: true, sheet: `P${n} Project` },
     {
@@ -111,7 +114,7 @@ export const STEPS = [
         label: 'Preferred contact channel',
         required: true,
         half: true,
-        options: ['Email', 'Phone call', 'WhatsApp', 'LinkedIn'],
+        options: ['Email', 'WhatsApp'],
       },
       {
         id: 'profiles',
@@ -186,7 +189,7 @@ export const STEPS = [
     id: 'b',
     letter: 'B',
     title: 'Commercial Track Record',
-    intro: 'Share three relevant projects delivered in the last 24 to 36 months. Be specific and honest about attribution.',
+    intro: 'Share three relevant projects delivered in the last 24 to 36 months. Be specific and honest about attribution. Kindly fill Nil for places with no answer.',
     fields: [
       project(1),
       project(2),

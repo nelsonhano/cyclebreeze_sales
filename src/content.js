@@ -345,5 +345,5 @@ export const FINAL = {
     'Complete the application and pre-screening form to tell us what you can deliver, how you work, and why you are a strong fit for the challenge.',
   ],
   support:
-    'The application form will ask about your experience, results, capabilities, costs, proposed execution approach, and availability.',
+    'The application form will ask about your experience, results, capabilities, costs, proposed execution approach, and availability. Kindly fill Nil for places with no answer.',
 }
