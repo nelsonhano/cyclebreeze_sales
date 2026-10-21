@@ -16,18 +16,15 @@ export const CONFIG = {
 }
 
 export const NAV = [
+  { href: '#timeline', label: 'Process' },
   { href: '#mandates', label: 'Deliver' },
   { href: '#gains', label: 'Rewards' },
-  { href: '#timeline', label: 'Process' },
   { href: '#faq', label: 'FAQ' },
   { href: '/terms', label: 'Terms' },
 ]
 
 export const HERO = {
   badge: 'Call for proposals',
-  title: 'CycleBreeze Commercial\nGrowth [Challenge]',
-  subtitle: 'CycleBreeze is looking for a long-term sales and marketing partner.',
-  lede: 'We invite qualified firms and individual professionals to take part in a performance-focused trial.',
   // The opportunity, read left to right: prove it, earn it, run it.
   path: [
     { step: '01', title: 'Prove your expertise', body: 'Take part in a performance-focused trial.', icon: 'target' },
@@ -46,7 +43,7 @@ export const HERO = {
 }
 
 export const PROBLEM = {
-  title: 'What is the Commercial\nGrowth [Challenge]?',
+  title: 'CycleBreeze Commercial\nGrowth [Challenge]',
   intro:
     'The CycleBreeze Commercial Growth Challenge is designed to identify capable commercial partners who can turn business opportunities into measurable results. The challenge focuses on two primary outcomes:',
   cards: [
@@ -63,7 +60,6 @@ export const PROBLEM = {
 }
 
 export const MANDATES_HEAD = {
-  stamp: 'What you stand to get',
   title: 'We value execution,\nnot just [ideas]',
   intro: 'Selected applicants may be expected to demonstrate capabilities such as:',
   note: 'These are examples of relevant capabilities, not mandatory services that every applicant must offer. Applicants should state their strongest areas honestly.',

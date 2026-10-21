@@ -527,37 +527,10 @@ button {
   animation: rise 0.8s var(--ease) both;
   animation-delay: calc(var(--intro) + var(--n, 0) * 0.08s);
 }
-.hero-title .kz-line {
-  animation: line-in 0.75s var(--spring) both;
-}
-.hero-title .kz-line:nth-child(1) {
-  animation-delay: calc(var(--intro) + 0.08s);
-}
-.hero-title .kz-line:nth-child(2) {
-  animation-delay: calc(var(--intro) + 0.16s);
-}
-.hero-title .kz-line:nth-child(3) {
-  animation-delay: calc(var(--intro) + 0.24s);
-}
-.hero-title .tag-word {
-  animation: tag-pop 0.7s var(--spring) both;
-  animation-delay: calc(var(--intro) + 0.5s);
-}
 @keyframes rise {
   from {
     opacity: 0;
     translate: 0 30px;
-  }
-}
-@keyframes line-in {
-  from {
-    opacity: 0;
-    translate: 0 60%;
-  }
-}
-@keyframes tag-pop {
-  from {
-    scale: 0.2;
   }
 }
 
@@ -586,22 +559,13 @@ button {
   border-radius: 8px;
   background: var(--ink);
   color: var(--green);
-  font-size: clamp(19px, 2.1vw, 28px);
-  font-weight: 700;
-  letter-spacing: 0.04em;
+  font-family: var(--f-display);
+  font-size: clamp(30px, 5vw, 64px);
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: 0.02em;
   text-transform: uppercase;
-  margin-bottom: 26px;
   box-shadow: 0 6px 14px -6px rgba(14, 22, 32, 0.4);
-}
-.hero-title {
-  --t: clamp(30px, 5.5vw, 80px);
-  line-height: 1.02;
-}
-.hero-lede {
-  max-width: 600px;
-  margin: 14px auto 0;
-  font-size: 17px;
-  color: var(--ink-soft);
 }
 /* The opportunity as three steps, connected left to right. */
 .hero-path {
@@ -763,7 +727,7 @@ button {
 
 /* ---------- Problem ---------- */
 .problem {
-  padding: 100px 0 110px;
+  padding: 130px 0 130px;
 }
 .outcomes {
   display: grid;
@@ -802,7 +766,7 @@ button {
 
 /* ---------- Mandates: capability columns ---------- */
 .mandates {
-  padding: 130px 0 120px;
+  padding: 40px 0 120px;
 }
 .caps {
   display: grid;
@@ -938,8 +902,8 @@ button {
 }
 
 /* ---------- Rewards table: both tracks side by side ---------- */
-.gains-head {
-  margin-top: 80px;
+.gains {
+  padding: 140px 0 130px;
 }
 .gains-table-wrap {
   margin-top: 10px;
@@ -1039,7 +1003,7 @@ button {
 
 /* ---------- Deal at a glance ---------- */
 .deal {
-  padding: 140px 0 140px;
+  padding: 60px 0 90px;
 }
 .deal-grid {
   display: grid;
@@ -1600,14 +1564,6 @@ button {
 }
 
 /* ---------- Brief copy additions ---------- */
-.hero-sub {
-  max-width: 680px;
-  margin: 18px auto 0;
-  font-family: var(--f-display);
-  font-weight: 700;
-  font-size: clamp(16px, 1.6vw, 20px);
-  color: var(--b1);
-}
 .hero-deadline {
   margin-top: 16px;
   font-size: 14px;
@@ -1620,7 +1576,7 @@ button {
   font-size: 16.5px;
   color: var(--ink-soft);
 }
-.mandates .stamp {
+.gains .stamp {
   --e: 6px;
   font-size: clamp(24px, 3.2vw, 44px);
   padding: 22px 36px 20px;

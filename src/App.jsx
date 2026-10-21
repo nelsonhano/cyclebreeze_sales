@@ -126,17 +126,10 @@ function Hero({ closed, now }) {
         ))}
       </svg>
       <div className="container hero-inner">
-        <p className="hero-badge intro" style={{ '--n': 0 }}>
+        <h1 className="hero-badge intro" style={{ '--n': 0 }}>
           {HERO.badge}
-        </p>
-        <Headline as="h1" className="hero-title" text={HERO.title} />
-        <p className="hero-sub intro" style={{ '--n': 3 }}>
-          {HERO.subtitle}
-        </p>
-        <p className="hero-lede intro" style={{ '--n': 4 }}>
-          {HERO.lede}
-        </p>
-        <ol className="hero-path intro" style={{ '--n': 5 }}>
+        </h1>
+        <ol className="hero-path intro" style={{ '--n': 3 }}>
           {HERO.path.map((p) => (
             <li key={p.step}>
               <span className="hp-icon">
@@ -148,7 +141,7 @@ function Hero({ closed, now }) {
             </li>
           ))}
         </ol>
-        <div className="hero-seek intro" style={{ '--n': 6 }}>
+        <div className="hero-seek intro" style={{ '--n': 4 }}>
           <p>{HERO.seekLead}</p>
           <ul>
             {HERO.seek.map((q) => (
@@ -178,7 +171,7 @@ function Hero({ closed, now }) {
 
 function Problem({ closed }) {
   return (
-    <section className="problem" id="problem">
+    <section className="problem bumps dotted" id="problem">
       <div className="container">
         <div data-reveal>
           <Headline text={PROBLEM.title} className="center" />
@@ -205,7 +198,7 @@ function Problem({ closed }) {
 
 function Mandates({ closed }) {
   return (
-    <section className="mandates bumps dotted" id="mandates">
+    <section className="mandates" id="mandates">
       <div className="container">
         <div className="section-head" data-reveal>
           <Headline text={MANDATES_HEAD.title} className="center" />
@@ -227,8 +220,22 @@ function Mandates({ closed }) {
           ))}
         </div>
         <p className="fine-print center">{MANDATES_HEAD.note}</p>
-        <div className="section-head gains-head">
-          <Stamp>{MANDATES_HEAD.stamp}</Stamp>
+        <div className="center-cta">
+          <ApplyButton closed={closed} />
+        </div>
+      </div>
+    </section>
+  )
+}
+
+/* ---------------- Gains: what they stand to get ---------------- */
+
+function Gains({ closed }) {
+  return (
+    <section className="gains bumps dotted">
+      <div className="container">
+        <div className="section-head">
+          <Stamp>{GAINS_HEAD.stamp}</Stamp>
         </div>
         <GainsTable />
         <p className="gains-close">{GAINS_HEAD.close}</p>
@@ -240,7 +247,7 @@ function Mandates({ closed }) {
   )
 }
 
-/* ---------------- Gains: both tracks in one table, shared terms stated once ---------------- */
+/* Both tracks in one table, shared terms stated once. */
 
 function GainsTable() {
   const [ind, firm] = GAINS
@@ -351,7 +358,7 @@ function Deal({ now }) {
   // Step 1 is current while applications are open; screening follows the deadline.
   const current = now <= DEADLINE ? 0 : 1
   return (
-    <section className="deal bumps dotted" id="timeline">
+    <section className="deal" id="timeline">
       <div className="container">
         <div className="section-head" data-reveal>
           <Headline text="How [selection] works" className="center" />
@@ -642,10 +649,11 @@ export default function App() {
       <Header closed={closed} />
       <main id="main">
         <Hero closed={closed} now={now} />
-        <Problem closed={closed} />
-        <Mandates closed={closed} />
-        <NotFor closed={closed} />
         <Deal now={now} />
+        <Mandates closed={closed} />
+        <Problem closed={closed} />
+        <NotFor closed={closed} />
+        <Gains closed={closed} />
         <Trial closed={closed} />
         <Faq />
         <Final closed={closed} />
