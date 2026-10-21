@@ -17,7 +17,7 @@ import {
   TIMELINE,
 } from './content.js'
 import { useNow, useReveal } from './hooks.js'
-import { ApplyButton, Headline, Icon, Scallop, Stamp, Sticker } from './ui.jsx'
+import { ApplyButton, BizzieLogo, Headline, Icon, Scallop, Stamp, Sticker } from './ui.jsx'
 
 const DEADLINE = new Date(CONFIG.deadline).getTime()
 const REDUCED = typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches
@@ -126,20 +126,22 @@ function Hero({ closed, now }) {
           {HERO.badge}
         </p>
         <Headline as="h1" className="hero-title" text={HERO.title} />
-        <p className="hero-sub intro" style={{ '--n': 3 }}>
-          {HERO.subtitle}
+        <div className="hero-copy intro" style={{ '--n': 3 }}>
+          {HERO.intro.map((t) => (
+            <p key={t}>{t}</p>
+          ))}
+        </div>
+        <p className="hero-ask intro" style={{ '--n': 7 }}>
+          {HERO.ask}
         </p>
-        <p className="hero-lede intro" style={{ '--n': 4 }}>
-          {HERO.lede}
-        </p>
-        <div className="hero-cta intro" style={{ '--n': 5 }}>
+        <div className="hero-cta intro" style={{ '--n': 7 }}>
           <ApplyButton closed={closed} label="Apply Now" />
           <a className="kz-btn outline" href="#problem">
             Explore the Opportunity
           </a>
           {!closed && <Countdown now={now} />}
         </div>
-        <p className="hero-deadline intro" style={{ '--n': 5 }}>
+        <p className="hero-deadline intro" style={{ '--n': 7 }}>
           {HERO.deadline}
         </p>
       </div>
@@ -181,7 +183,6 @@ function Mandates({ closed }) {
     <section className="mandates bumps dotted" id="mandates">
       <div className="container">
         <div className="section-head" data-reveal>
-          <Stamp>{MANDATES_HEAD.stamp}</Stamp>
           <Headline text={MANDATES_HEAD.title} className="center" />
           <p className="section-lede center">{MANDATES_HEAD.intro}</p>
         </div>
@@ -206,6 +207,9 @@ function Mandates({ closed }) {
           ))}
         </div>
         <p className="fine-print center">{MANDATES_HEAD.note}</p>
+        <div className="section-head gains-head">
+          <Stamp>{MANDATES_HEAD.stamp}</Stamp>
+        </div>
         <GainsTable />
         <p className="gains-close">{GAINS_HEAD.close}</p>
         <div className="center-cta">
@@ -354,7 +358,7 @@ function Deal({ now }) {
             <p className="deal-for">
               <span>Growth for:</span>
               <img src="/brand/cyclebreeze-logo.webp" alt="CycleBreeze" width="600" height="183" />
-              <b className="bizzie-chip">Bizzie</b>
+              <BizzieLogo />
               <span className="deal-note">
                 Important: selection for the trial does not guarantee a job, contract, or ongoing engagement.
               </span>
@@ -379,7 +383,7 @@ function Trial({ closed }) {
           <Stamp tone="green">Call for proposals</Stamp>
           <p className="band-text kz-title">
             <span className="kz-line">
-              <em>for</em> firms and agencies,
+              <em>For</em> firms and agencies,
             </span>
             <span className="kz-line">individual professionals,</span>
             <span className="kz-line">
@@ -387,7 +391,7 @@ function Trial({ closed }) {
             </span>
           </p>
           <img className="band-photo p1" src="/photos/team.webp" alt="" loading="lazy" />
-          <img className="band-photo p2" src="/photos/bizzie.webp" alt="" loading="lazy" />
+          <img className="band-photo p2 band-logo" src="/brand/bizzie-logo.png" alt="Bizzie" loading="lazy" />
           <img className="band-photo p3" src="/photos/developer.webp" alt="" loading="lazy" />
           <ApplyButton closed={closed} className="band-cta" />
         </div>

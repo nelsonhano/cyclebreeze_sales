@@ -129,3 +129,12 @@ export function ApplyButton({ closed, label = 'Apply now', variant = '', classNa
     </a>
   )
 }
+
+// Bizzie's horizontal lockup on a white pill, shown beside the CycleBreeze logo.
+export function BizzieLogo() {
+  return (
+    <span className="bizzie-logo">
+      <img src="/brand/bizzie-lockup.png" alt="Bizzie" width="1098" height="297" />
+    </span>
+  )
+}

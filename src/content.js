@@ -25,8 +25,11 @@ export const NAV = [
 export const HERO = {
   badge: 'Call for proposals',
   title: 'CycleBreeze Commercial\nGrowth [Challenge]',
-  subtitle: 'We’re seeking exceptional Sales, Marketing & Commercial Growth Partners to execute high-value marketing projects with multi-million-naira budgets.',
-  lede: 'Win the opportunity to become an Official Marketing Partner to CycleBreeze, our subsidiaries, and our growing portfolio of clients.',
+  intro: [
+    'CycleBreeze is looking for a long-term sales and marketing partner. We invite qualified firms and individual professionals to take part in a performance-focused trial. This is an opportunity to demonstrate your expertise and position yourself for an official marketing partnership, managing sales and marketing initiatives across CycleBreeze, its subsidiaries and its clients, with budgets running into millions of naira.',
+    'The trial is designed to identify and build lasting partnerships with professionals and firms who deliver measurable results, execute effectively and develop practical systems that drive commercial growth.',
+  ],
+  ask: 'Apply to be considered.',
   deadline: 'Applications close Friday, 23 October 2026, at 11:59 PM WAT.',
 }
 
@@ -40,7 +43,7 @@ export const PROBLEM = {
       body: 'Identify and qualify relevant business prospects, develop effective sales approaches, convert qualified prospects into paying CycleBreeze clients, and generate revenue for our technology services.',
     },
     {
-      title: '2. Bizzie Product Growth (Subsidiary)',
+      title: '2. Bizzie Product Growth (Subsidiary product)',
       body: 'Help relevant users discover and activate Bizzie, continue using the product, and convert into paid subscriptions or other approved revenue-generating actions.',
     },
   ],

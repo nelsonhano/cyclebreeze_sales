@@ -195,7 +195,6 @@ button {
   padding: 0.14em 0.36em 0.2em;
   margin: 0.05em 0.08em;
   border-radius: 0.16em;
-  rotate: -3deg;
   box-shadow:
     0 0 0 0.07em var(--white),
     0 0.16em 0.4em rgba(14, 22, 32, 0.28);
@@ -207,14 +206,10 @@ button {
 }
 [data-reveal] .tag-word {
   scale: 0.3;
-  rotate: -18deg;
-  transition:
-    scale 0.7s var(--spring) 0.35s,
-    rotate 0.7s var(--spring) 0.35s;
+  transition: scale 0.7s var(--spring) 0.35s;
 }
 [data-reveal].is-in .tag-word {
   scale: 1;
-  rotate: -3deg;
 }
 
 .script-sub {
@@ -243,7 +238,6 @@ button {
   padding: 9px 12px 8px;
   background: var(--b1);
   color: var(--white);
-  rotate: -4deg;
 }
 .stamp-green {
   background: var(--green);
@@ -286,12 +280,10 @@ button {
     0 8px 18px -6px rgba(14, 22, 32, 0.3);
   transition:
     translate 0.2s var(--ease),
-    box-shadow 0.2s var(--ease),
-    rotate 0.2s var(--ease);
+    box-shadow 0.2s var(--ease);
 }
 .kz-btn:hover {
   translate: 0 -2px;
-  rotate: -1.5deg;
   box-shadow:
     0 5px 0 var(--ink),
     0 12px 22px -6px rgba(14, 22, 32, 0.35);
@@ -308,7 +300,6 @@ button {
   color: var(--muted);
   box-shadow: none;
   cursor: not-allowed;
-  rotate: 0deg;
   translate: 0;
   padding: 11px 16px;
 }
@@ -319,7 +310,6 @@ button {
   width: 24px;
   height: 24px;
   color: var(--white);
-  transition: rotate 0.35s var(--spring);
 }
 .arrow-badge svg {
   position: absolute;
@@ -328,9 +318,6 @@ button {
 }
 .arrow-badge > :last-child {
   position: relative;
-}
-.kz-btn:hover .arrow-badge {
-  rotate: -45deg;
 }
 
 /* Sticker badges */
@@ -566,13 +553,11 @@ button {
   from {
     opacity: 0;
     translate: 0 60%;
-    rotate: 3deg;
   }
 }
 @keyframes tag-pop {
   from {
     scale: 0.2;
-    rotate: -20deg;
   }
 }
 
@@ -613,10 +598,27 @@ button {
   line-height: 1.02;
 }
 .hero-lede {
-  max-width: 560px;
-  margin: 20px auto 22px;
+  max-width: 600px;
+  margin: 14px auto 0;
   font-size: 17px;
   color: var(--ink-soft);
+}
+/* Hero intro: plain paragraphs, kept to a readable measure. */
+.hero-copy {
+  max-width: 860px;
+  margin: 28px auto 0;
+  display: grid;
+  gap: 18px;
+  font-size: clamp(17px, 1.5vw, 21px);
+  line-height: 1.7;
+  color: var(--ink-soft);
+}
+.hero-ask {
+  margin: 34px auto 16px;
+  font-family: var(--f-display);
+  font-size: clamp(20px, 2vw, 25px);
+  font-weight: 800;
+  color: var(--ink);
 }
 .hero-cta {
   display: flex;
@@ -771,7 +773,6 @@ button {
   position: absolute;
   right: -70px;
   top: -30px;
-  rotate: 14deg;
   animation: bob 2.4s ease-in-out infinite alternate;
 }
 .qualities {
@@ -843,8 +844,11 @@ button {
 }
 
 /* ---------- Rewards table: both tracks side by side ---------- */
+.gains-head {
+  margin-top: 80px;
+}
 .gains-table-wrap {
-  margin-top: 70px;
+  margin-top: 10px;
   scroll-margin-top: 110px;
 }
 .gains-table {
@@ -1027,15 +1031,28 @@ button {
   height: 24px;
   width: auto;
 }
-.bizzie-chip {
-  padding: 4px 9px 3px;
-  border-radius: 4px;
-  background: var(--ink);
-  color: var(--green);
-  font-family: var(--f-display);
-  font-weight: 700;
-  font-size: 10px;
-  text-transform: uppercase;
+/* Bizzie lockup inline with text: a white pill keeps the black wordmark legible on blue and ink. */
+.bizzie-logo {
+  display: inline-flex;
+  align-items: center;
+  height: 1.45em;
+  padding: 0.22em 0.42em;
+  margin: 0 0.08em;
+  vertical-align: -0.38em;
+  background: var(--white);
+  border-radius: 0.3em;
+}
+.bizzie-logo img {
+  height: 100%;
+  width: auto;
+}
+.deal-for .bizzie-logo {
+  height: 30px;
+  font-size: 14px;
+  vertical-align: middle;
+}
+.deal-for .bizzie-logo img {
+  height: 100%;
 }
 .deal-note {
   margin-left: auto;
@@ -1094,9 +1111,12 @@ button {
   border-radius: 0 0 18px 18px;
 }
 .trial-band .stamp {
+  --e: 5px;
   position: absolute;
-  top: -14px;
+  top: -22px;
   left: 30px;
+  font-size: clamp(15px, 1.8vw, 24px);
+  padding: 16px 26px 14px;
 }
 .band-text {
   --t: clamp(18px, 2.5vw, 36px);
@@ -1121,10 +1141,15 @@ button {
   right: 60px;
 }
 .band-photo.p2 {
-  width: 76px;
-  top: 30px;
-  right: calc(50% - 60px);
+  width: 96px;
+  top: 22px;
+  right: calc(50% - 70px);
   animation-delay: -1.2s;
+}
+/* Logo, not a photo: show the whole mark on white instead of cropping it. */
+.band-logo {
+  object-fit: contain;
+  background: var(--white);
 }
 .band-photo.p3 {
   width: 92px;
@@ -1476,7 +1501,6 @@ button {
   }
   [data-reveal] .tag-word {
     scale: 1;
-    rotate: -3deg;
   }
 }
 
@@ -1502,10 +1526,10 @@ button {
   color: var(--ink-soft);
 }
 .mandates .stamp {
-  --e: 5px;
-  font-size: clamp(20px, 2.4vw, 32px);
-  padding: 18px 28px 16px;
-  margin-bottom: 30px;
+  --e: 6px;
+  font-size: clamp(24px, 3.2vw, 44px);
+  padding: 22px 36px 20px;
+  margin-bottom: 34px;
 }
 .mandates .section-lede {
   max-width: 760px;
