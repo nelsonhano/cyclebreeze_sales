@@ -5,6 +5,8 @@ import {
   CONFIG,
   FAQS,
   FINAL,
+  GAINS,
+  GAINS_HEAD,
   HERO,
   MANDATES,
   MANDATES_HEAD,
@@ -14,7 +16,7 @@ import {
   PROBLEM,
   TIMELINE,
 } from './content.js'
-import { useNow, useReveal, useScrollProgress } from './hooks.js'
+import { useNow, useReveal } from './hooks.js'
 import { ApplyButton, Headline, Icon, Scallop, Stamp, Sticker } from './ui.jsx'
 
 const DEADLINE = new Date(CONFIG.deadline).getTime()
@@ -121,15 +123,9 @@ function Hero({ closed, now }) {
       </svg>
       <div className="container hero-inner">
         <p className="hero-badge intro" style={{ '--n': 0 }}>
-          <Sticker icon="trophy" tone="green" className="hero-badge-icon" />
           {HERO.badge}
         </p>
-        <Headline
-          as="h1"
-          className="hero-title"
-          text={HERO.title}
-          mascot={<img className="mascot" src="/brand/cb-mark.png" alt="" width="99" height="153" />}
-        />
+        <Headline as="h1" className="hero-title" text={HERO.title} />
         <p className="hero-sub intro" style={{ '--n': 3 }}>
           {HERO.subtitle}
         </p>
@@ -151,10 +147,9 @@ function Hero({ closed, now }) {
   )
 }
 
-/* ---------------- Problem: bitten cards drop into their slots ---------------- */
+/* ---------------- Problem: the two outcomes, stacked ---------------- */
 
 function Problem({ closed }) {
-  const ref = useScrollProgress((r, vh) => (vh * 0.98 - r.top) / (vh * 0.62))
   return (
     <section className="problem" id="problem">
       <div className="container">
@@ -162,14 +157,12 @@ function Problem({ closed }) {
           <Headline text={PROBLEM.title} className="center" />
           <p className="section-lede center">{PROBLEM.intro}</p>
         </div>
-        <div className="bites" ref={ref}>
+        <div className="outcomes">
           {PROBLEM.cards.map((c, i) => (
-            <div className="bite-slot" key={c.title}>
-              <article className={`bite-card c${i}`} style={{ '--side': i ? 1 : -1 }}>
-                <Headline as="h3" text={c.title} className="bite-title" />
-                <p>{c.body}</p>
-              </article>
-            </div>
+            <article className={`outcome c${i}`} key={c.title} data-reveal>
+              <h3 className="outcome-title">{c.title}</h3>
+              <p>{c.body}</p>
+            </article>
           ))}
         </div>
         <p className="fine-print center">{PROBLEM.note}</p>
@@ -181,7 +174,7 @@ function Problem({ closed }) {
   )
 }
 
-/* ---------------- Mandates: sticky folder cards stack on scroll ---------------- */
+/* ---------------- Mandates: capability columns ---------------- */
 
 function Mandates({ closed }) {
   return (
@@ -192,46 +185,107 @@ function Mandates({ closed }) {
           <Headline text={MANDATES_HEAD.title} className="center" />
           <p className="section-lede center">{MANDATES_HEAD.intro}</p>
         </div>
-        <div className="stack" style={{ '--count': MANDATES.length }}>
-          {MANDATES.map((m, i) => (
-            <article className={`stack-card c${i}`} key={m.id} style={{ '--i': i }}>
-              <div className="stack-tab">
-                <Icon name={m.icon} size={15} />
-                <span className="tab-long">{m.tab}</span>
-                <span className="tab-short">{m.short}</span>
-              </div>
-              <div className="stack-body">
-                <div className="stack-copy">
-                  <h3 className="kz-title stack-title">
-                    {m.title.split('\n').map((l) => (
-                      <span className="kz-line" key={l}>
-                        {l}
-                      </span>
-                    ))}
-                  </h3>
-                  <ul>
-                    {m.points.map((p) => (
-                      <li key={p}>{p}</li>
-                    ))}
-                  </ul>
-                  {m.link && (
-                    <a className="stack-link" href={m.link.href} target="_blank" rel="noreferrer">
-                      {m.link.label} ↗
-                    </a>
-                  )}
-                  <ApplyButton closed={closed} className="stack-cta" />
-                </div>
-                <div className="stack-media">
-                  <img src={m.img} alt="" style={{ objectPosition: m.pos }} loading="lazy" />
-                  <Sticker icon={m.sticker} tone="green" className="stack-sticker" />
-                </div>
-              </div>
-            </article>
+        <div className="caps">
+          {MANDATES.map((m) => (
+            <div className="cap" key={m.id} data-reveal>
+              <h3 className="cap-name">
+                <Icon name={m.icon} size={16} />
+                {m.tab}
+              </h3>
+              <ul>
+                {m.points.map((p) => (
+                  <li key={p}>{p}</li>
+                ))}
+              </ul>
+              {m.link && (
+                <a className="cap-link" href={m.link.href} target="_blank" rel="noreferrer">
+                  {m.link.label} ↗
+                </a>
+              )}
+            </div>
           ))}
         </div>
         <p className="fine-print center">{MANDATES_HEAD.note}</p>
+        <GainsTable />
+        <p className="gains-close">{GAINS_HEAD.close}</p>
+        <div className="center-cta">
+          <ApplyButton closed={closed} />
+        </div>
       </div>
     </section>
+  )
+}
+
+/* ---------------- Gains: both tracks in one table, shared terms stated once ---------------- */
+
+function GainsTable() {
+  const [ind, firm] = GAINS
+  const label = (text) => (
+    <tr className="label">
+      <th colSpan={2} scope="colgroup">
+        {text}
+      </th>
+    </tr>
+  )
+  return (
+    <div className="gains-table-wrap" id="gains" data-reveal>
+      <table className="gains-table">
+        <thead>
+          <tr>
+            {GAINS.map((t) => (
+              <th scope="col" key={t.id}>
+                <Icon name={t.icon} size={16} />
+                {t.track}
+              </th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {ind.gains.map((g, i) => (
+            <tr key={g.title}>
+              {[g, firm.gains[i]].map((x) => (
+                <td key={x.title}>
+                  <b>{x.title}</b>
+                  {x.body}
+                </td>
+              ))}
+            </tr>
+          ))}
+        </tbody>
+        <tbody>
+          <tr className="group">
+            <th colSpan={2} scope="colgroup">
+              1st place
+            </th>
+          </tr>
+          {label('Role')}
+          <tr>
+            <td>{ind.first.role}</td>
+            <td>{firm.first.role}</td>
+          </tr>
+          {label('Reward, upon successful completion')}
+          <tr>
+            <td className="amount">{ind.first.reward}</td>
+            <td className="amount">{firm.first.reward}</td>
+          </tr>
+          {label('Commission')}
+          <tr>
+            <td colSpan={2}>{ind.first.commission}</td>
+          </tr>
+        </tbody>
+        <tbody>
+          <tr className="group">
+            <th colSpan={2} scope="colgroup">
+              2nd &amp; 3rd place
+            </th>
+          </tr>
+          <tr>
+            <td>{ind.runnersUp}</td>
+            <td>{firm.runnersUp}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   )
 }
 

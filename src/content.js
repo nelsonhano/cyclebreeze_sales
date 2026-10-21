@@ -17,6 +17,7 @@ export const CONFIG = {
 
 export const NAV = [
   { href: '#mandates', label: 'Deliver' },
+  { href: '#gains', label: 'Rewards' },
   { href: '#timeline', label: 'Process' },
   { href: '#faq', label: 'FAQ' },
 ]
@@ -24,8 +25,8 @@ export const NAV = [
 export const HERO = {
   badge: 'Call for proposals',
   title: 'CycleBreeze Commercial\nGrowth [Challenge]',
-  subtitle: 'Sales, Marketing & Commercial Growth Partners Wanted',
-  lede: 'CycleBreeze is inviting qualified firms and individual professionals to participate in a performance-focused trial to help grow our technology services and Bizzie product.',
+  subtitle: 'We’re seeking exceptional Sales, Marketing & Commercial Growth Partners to execute high-value marketing projects with multi-million-naira budgets.',
+  lede: 'Win the opportunity to become an Official Marketing Partner to CycleBreeze, our subsidiaries, and our growing portfolio of clients.',
   deadline: 'Applications close Friday, 23 October 2026, at 11:59 PM WAT.',
 }
 
@@ -35,11 +36,11 @@ export const PROBLEM = {
     'The CycleBreeze Commercial Growth Challenge is designed to identify capable commercial partners who can turn business opportunities into measurable results. The challenge focuses on two primary outcomes:',
   cards: [
     {
-      title: '1. B2B Sales\n*and* Revenue',
+      title: '1. B2B Sales and Revenue',
       body: 'Identify and qualify relevant business prospects, develop effective sales approaches, convert qualified prospects into paying CycleBreeze clients, and generate revenue for our technology services.',
     },
     {
-      title: '2. Bizzie\n*Product* Growth',
+      title: '2. Bizzie Product Growth (Subsidiary)',
       body: 'Help relevant users discover and activate Bizzie, continue using the product, and convert into paid subscriptions or other approved revenue-generating actions.',
     },
   ],
@@ -47,7 +48,7 @@ export const PROBLEM = {
 }
 
 export const MANDATES_HEAD = {
-  stamp: 'What we need you to deliver',
+  stamp: 'What they stand to get',
   title: 'We value execution,\nnot just [ideas]',
   intro: 'Selected applicants may be expected to demonstrate capabilities such as:',
   note: 'These are examples of relevant capabilities, not mandatory services that every applicant must offer. Applicants should state their strongest areas honestly.',
@@ -113,6 +114,49 @@ export const NOT_FOR = [
 export const NOT_FOR_CLOSE =
   'We value integrity as much as performance. Misleading claims, fabricated metrics, fake engagement, unauthorised use of data, and unapproved spending may result in disqualification.'
 
+export const GAINS_HEAD = {
+  stamp: 'What they stand to get',
+  title: 'More than a trial.\nBuild, grow and [earn]',
+  close: 'Deliver results. Unlock opportunities. Grow with CycleBreeze.',
+}
+
+export const GAINS = [
+  {
+    id: 'individual',
+    track: 'Individual professionals',
+    icon: 'briefcase',
+    gains: [
+      { title: 'Paid engagements', body: 'Salary or agreed contract fees, plus commission where applicable.' },
+      { title: 'Real-world projects', body: 'Work on technology, sales and product growth initiatives.' },
+      { title: 'Tools & resources', body: 'Potential access to company-funded tools and systems.' },
+      { title: 'Career growth', body: 'Prove your ability to drive sales, revenue and user growth.' },
+    ],
+    first: {
+      role: 'Sales & Growth Job',
+      reward: '₦500,000',
+      commission: '5% on cash received from originated B2B deals and paid Bizzie subscriptions, for the agreed period.',
+    },
+    runnersUp: 'Three-month paid contracts in their strongest area of expertise.',
+  },
+  {
+    id: 'firm',
+    track: 'Firms & agencies',
+    icon: 'target',
+    gains: [
+      { title: 'Commercial contracts', body: 'Paid service contracts and performance incentives where agreed.' },
+      { title: 'Ongoing projects', body: 'Opportunities across CycleBreeze services, products and client projects.' },
+      { title: 'Operational support', body: 'Potential access to CycleBreeze tools and business systems.' },
+      { title: 'Long-term partnership', body: 'Position your firm for continued collaboration through results.' },
+    ],
+    first: {
+      role: 'Retained Growth Partner (agreed terms)',
+      reward: '₦750,000',
+      commission: '5% on cash received from originated B2B deals and paid Bizzie subscriptions, for the agreed period.',
+    },
+    runnersUp: 'Placement on CycleBreeze’s preferred-vendor panel.',
+  },
+]
+
 export const TIMELINE = [
   {
     stage: 'Application submission',
@@ -153,7 +197,7 @@ export const FAQS = [
   },
   {
     q: 'What is the trial allocation?',
-    a: '₦100,000 for firms and agencies, and ₦50,000 for individual professionals. Trial allocations are available only to shortlisted applicants selected for trial execution, and are subject to the trial rules and an approved execution plan.',
+    a: '₦100,000 for firms and agencies, and ₦50,000 for individual professionals. Trial allocations are available only to shortlisted applicants selected for trial execution, and are subject to the trial rules and an approved execution plan. They are separate from the prizes: the top performers in each track also win the rewards listed under “What they stand to get”.',
   },
   {
     q: 'How many applicants will be selected?',
@@ -173,7 +217,7 @@ export const FAQS = [
   },
   {
     q: 'Is a job or contract guaranteed?',
-    a: 'No. Selection for the trial does not guarantee a job, contract, or ongoing engagement. Strong performers may be considered for longer-term collaboration, subject to mutual agreement and separate written terms.',
+    a: 'Not for taking part. Selection for the trial does not guarantee a job, contract, or ongoing engagement. The 1st-place prizes include a Sales & Growth Job for individuals and a Retained Growth Partner role for firms, on agreed terms. Other strong performers may be considered for longer-term collaboration, subject to mutual agreement and separate written terms.',
   },
   {
     q: 'Who do I contact?',
