@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Menu, Plus, X } from 'lucide-react'
+import { Menu, Minus, Plus, X } from 'lucide-react'
 import ApplicationForm from './ApplicationForm.jsx'
 import {
   CONFIG,
@@ -403,30 +403,25 @@ function Faq() {
   return (
     <section className="faq" id="faq">
       <div className="container faq-grid">
-        <div className="faq-side" data-reveal>
-          <Stamp>FAQ</Stamp>
-          <Headline text={'Before you\n[apply]'} />
-          <div className="faq-mascot" aria-hidden="true">
-            <img src="/brand/cb-mark.png" alt="" />
-            <span className="spark s1" />
-            <span className="spark s2" />
-            <span className="spark s3" />
-          </div>
+        <div className="faq-side">
+          <p className="faq-eyebrow">FAQ</p>
+          <h2 className="faq-title">Frequently asked questions</h2>
+          <p className="faq-intro">Answers to common questions about eligibility, assessment and what happens after you apply.</p>
           <p className="faq-mail">
-            Still stuck? <a href={`mailto:${CONFIG.email}`}>{CONFIG.email}</a>
+            Still have a question?
+            <a href={`mailto:${CONFIG.email}`}>{CONFIG.email}</a>
           </p>
         </div>
-        {/* Reveal on the list, not the items: toggling an item's className would drop the observer's is-in class. */}
-        <div className="faq-list" data-reveal>
+        <div className="faq-list">
           {FAQS.map((f, i) => {
             const isOpen = open === i
             return (
               <div className={`faq-item ${isOpen ? 'is-open' : ''}`} key={f.q}>
                 <h3>
                   <button aria-expanded={isOpen} aria-controls={`faq-${i}`} id={`faq-q-${i}`} onClick={() => setOpen(isOpen ? -1 : i)}>
-                    {f.q}
+                    <span>{f.q}</span>
                     <span className="faq-plus">
-                      <Plus size={14} strokeWidth={3} aria-hidden="true" />
+                      {isOpen ? <Minus size={18} aria-hidden="true" /> : <Plus size={18} aria-hidden="true" />}
                     </span>
                   </button>
                 </h3>

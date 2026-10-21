@@ -1186,93 +1186,64 @@ button {
   }
 }
 
-/* ---------- FAQ ---------- */
+/* ---------- FAQ: plain two-column accordion, no motion ---------- */
 .faq {
   padding: 110px 0 130px;
 }
 .faq-grid {
   display: grid;
   grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
-  gap: 60px;
+  gap: 80px;
   align-items: start;
 }
-.faq-side .kz-title {
-  --t: clamp(28px, 3.6vw, 52px);
-  margin-top: 16px;
+.faq-side {
+  position: sticky;
+  top: 130px;
 }
-.faq-mascot {
-  position: relative;
-  width: 150px;
-  margin: 34px 0 20px 10px;
+.faq-eyebrow {
+  font-family: var(--f-display);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--b1);
 }
-.faq-mascot img {
-  width: 104px;
-  transform-origin: 50% 100%;
-  animation: hop 1.8s ease-in-out infinite;
-  filter: drop-shadow(0 10px 10px rgba(14, 22, 32, 0.25));
+.faq-title {
+  margin-top: 12px;
+  font-family: var(--f-display);
+  font-weight: 800;
+  font-size: clamp(30px, 3.4vw, 46px);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--ink);
 }
-@keyframes hop {
-  0%,
-  100% {
-    translate: 0 0;
-    scale: 1 1;
-  }
-  40% {
-    translate: 0 -14px;
-    scale: 0.96 1.04;
-  }
-  60% {
-    translate: 0 0;
-    scale: 1.05 0.95;
-  }
+.faq-intro {
+  margin-top: 18px;
+  max-width: 420px;
+  font-size: 16.5px;
+  line-height: 1.6;
+  color: var(--ink-soft);
 }
-.spark {
-  position: absolute;
-  width: 4px;
-  height: 16px;
-  border-radius: 4px;
-  background: var(--ink);
-  animation: spark 1.8s ease-in-out infinite;
-}
-.spark.s1 {
-  left: 118px;
-  top: 6px;
-  rotate: 30deg;
-}
-.spark.s2 {
-  left: 130px;
-  top: 30px;
-  rotate: 70deg;
-}
-.spark.s3 {
-  left: 104px;
-  top: -12px;
-}
-@keyframes spark {
-  0%,
-  100% {
-    opacity: 0.2;
-  }
-  50% {
-    opacity: 1;
-  }
+.faq-mail {
+  display: grid;
+  gap: 4px;
+  margin-top: 32px;
+  padding-top: 24px;
+  border-top: 1px solid var(--line);
+  font-size: 15px;
+  color: var(--muted);
 }
 .faq-mail a {
+  font-size: 16.5px;
   font-weight: 600;
+  color: var(--ink);
   text-underline-offset: 4px;
 }
 .faq-list {
-  display: grid;
-  gap: 12px;
+  border-top: 1px solid var(--ink);
 }
 .faq-item {
-  border-radius: 8px;
-  background: var(--white);
-  box-shadow: 0 0 0 1px rgba(14, 22, 32, 0.06);
-  transition: box-shadow 0.2s ease;
-}
-.faq-item.is-open {
-  box-shadow: 0 0 0 1.5px var(--ink);
+  border-bottom: 1px solid var(--line);
 }
 .faq-item h3 {
   font-size: inherit;
@@ -1282,68 +1253,61 @@ button {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 16px;
-  padding: 18px 20px;
+  gap: 24px;
+  padding: 24px 0;
   border: 0;
   background: none;
   text-align: left;
-  font-size: 16px;
+  font-family: var(--f-display);
+  font-size: 17px;
   font-weight: 600;
+  line-height: 1.4;
+  color: var(--ink);
   cursor: pointer;
+}
+.faq-item button:focus-visible {
+  outline: 2px solid var(--b1);
+  outline-offset: 4px;
 }
 .faq-plus {
   display: grid;
   place-items: center;
   flex-shrink: 0;
-  width: 22px;
-  height: 22px;
+  width: 32px;
+  height: 32px;
+  border: 1px solid var(--line);
   border-radius: 50%;
-  background: var(--green);
-  border: 1.5px solid var(--ink);
-  transition: rotate 0.35s var(--spring);
+  color: var(--ink);
 }
 .is-open .faq-plus {
-  rotate: 135deg;
-}
-.faq-a {
-  display: grid;
-  grid-template-rows: 0fr;
-  transition: grid-template-rows 0.35s var(--ease);
-}
-.is-open .faq-a {
-  grid-template-rows: 1fr;
-}
-.faq-a > div {
-  overflow: hidden;
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--white);
 }
 .faq-a p {
-  padding: 0 20px 20px;
+  max-width: 640px;
+  padding: 0 56px 26px 0;
+  font-size: 15.5px;
+  line-height: 1.7;
   color: var(--ink-soft);
-  font-size: 15px;
 }
 .faq-item:not(.is-open) .faq-a {
-  visibility: hidden;
+  display: none;
 }
 @media (max-width: 860px) {
   .faq-grid {
     grid-template-columns: 1fr;
-    gap: 30px;
+    gap: 40px;
   }
   .faq-side {
-    position: relative;
+    position: static;
   }
-  .faq-mascot {
-    position: absolute;
-    top: 0;
-    right: 0;
-    margin: 0;
-    width: 80px;
+  .faq-item button {
+    padding: 20px 0;
+    font-size: 16px;
   }
-  .faq-mascot img {
-    width: 64px;
-  }
-  .spark {
-    display: none;
+  .faq-a p {
+    padding-right: 0;
   }
 }
 
