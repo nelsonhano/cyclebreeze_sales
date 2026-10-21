@@ -1625,6 +1625,8 @@ button {
   font-size: clamp(24px, 3.2vw, 44px);
   padding: 22px 36px 20px;
   margin-bottom: 34px;
+  background: #000;
+  color: #fff;
 }
 .mandates .section-lede {
   max-width: 760px;
