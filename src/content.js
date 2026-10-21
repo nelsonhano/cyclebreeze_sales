@@ -20,6 +20,7 @@ export const NAV = [
   { href: '#gains', label: 'Rewards' },
   { href: '#timeline', label: 'Process' },
   { href: '#faq', label: 'FAQ' },
+  { href: '/terms', label: 'Terms' },
 ]
 
 export const HERO = {
@@ -98,7 +99,6 @@ export const MANDATES = [
     img: '/photos/bizzie.webp',
     pos: '15% 50%',
     sticker: 'whatsapp',
-    link: { href: 'https://usebizzie.com', label: 'usebizzie.com' },
   },
   {
     id: 'systems',

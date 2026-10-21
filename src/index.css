@@ -833,17 +833,6 @@ button {
 .cap li {
   font-size: 16.5px;
 }
-.cap li::before {
-  content: '✱';
-  margin-right: 8px;
-  color: var(--b1);
-}
-.cap-link {
-  display: inline-block;
-  margin-top: 16px;
-  font-weight: 600;
-  text-underline-offset: 4px;
-}
 @media (max-width: 860px) {
   .caps {
     grid-template-columns: 1fr;
@@ -1255,6 +1244,7 @@ button {
 .band-logo {
   object-fit: contain;
   background: var(--white);
+  padding: 18px;
 }
 .band-photo.p3 {
   width: 92px;

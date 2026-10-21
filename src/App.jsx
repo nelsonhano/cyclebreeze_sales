@@ -77,7 +77,7 @@ function Header({ closed }) {
         <div className="hdr-right">
           <nav className="hdr-nav" aria-label="Primary">
             {NAV.map((n) => (
-              <a key={n.href} href={base + n.href} onClick={() => setOpen(false)}>
+              <a key={n.href} href={n.href.startsWith('#') ? base + n.href : n.href} onClick={() => setOpen(false)}>
                 {n.label}
               </a>
             ))}
@@ -164,9 +164,6 @@ function Hero({ closed, now }) {
         </p>
         <div className="hero-cta intro" style={{ '--n': 7 }}>
           <ApplyButton closed={closed} label="Apply Now" />
-          <a className="kz-btn outline" href="#problem">
-            Explore the Opportunity
-          </a>
           {!closed && <Countdown now={now} />}
         </div>
         <p className="hero-deadline intro" style={{ '--n': 7 }}>
@@ -226,11 +223,6 @@ function Mandates({ closed }) {
                   <li key={p}>{p}</li>
                 ))}
               </ul>
-              {m.link && (
-                <a className="cap-link" href={m.link.href} target="_blank" rel="noreferrer">
-                  {m.link.label} ↗
-                </a>
-              )}
             </div>
           ))}
         </div>
@@ -419,7 +411,7 @@ function Trial({ closed }) {
             </span>
           </p>
           <img className="band-photo p1" src="/photos/team.webp" alt="" loading="lazy" />
-          <img className="band-photo p2 band-logo" src="/brand/bizzie-logo.png" alt="Bizzie" loading="lazy" />
+          <img className="band-photo p2 band-logo" src="/brand/cb-mark.png" alt="CycleBreeze" loading="lazy" />
           <img className="band-photo p3" src="/photos/developer.webp" alt="" loading="lazy" />
           <ApplyButton closed={closed} className="band-cta" />
         </div>
