@@ -1,3 +1,6 @@
 {
-  "rewrites": [{ "source": "/submit", "destination": "/index.html" }]
+  "rewrites": [
+    { "source": "/submit", "destination": "/index.html" },
+    { "source": "/terms", "destination": "/index.html" }
+  ]
 }

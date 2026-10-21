@@ -25,10 +25,21 @@ export const NAV = [
 export const HERO = {
   badge: 'Call for proposals',
   title: 'CycleBreeze Commercial\nGrowth [Challenge]',
-  intro: [
-    'CycleBreeze is looking for a long-term sales and marketing partner. We invite qualified firms and individual professionals to take part in a performance-focused trial. This is an opportunity to demonstrate your expertise and position yourself for an official marketing partnership, managing sales and marketing initiatives across CycleBreeze, its subsidiaries and its clients, with budgets running into millions of naira.',
-    'The trial is designed to identify and build lasting partnerships with professionals and firms who deliver measurable results, execute effectively and develop practical systems that drive commercial growth.',
+  subtitle: 'CycleBreeze is looking for a long-term sales and marketing partner.',
+  lede: 'We invite qualified firms and individual professionals to take part in a performance-focused trial.',
+  // The opportunity, read left to right: prove it, earn it, run it.
+  path: [
+    { step: '01', title: 'Prove your expertise', body: 'Take part in a performance-focused trial.', icon: 'target' },
+    { step: '02', title: 'Become an official partner', body: 'Earn an official marketing partnership with CycleBreeze.', icon: 'handshake' },
+    {
+      step: '03',
+      title: 'Run multi-million-naira budgets',
+      body: 'Manage sales and marketing across CycleBreeze, its subsidiaries and its clients.',
+      icon: 'rocket',
+    },
   ],
+  seekLead: 'We’re building lasting partnerships with those who',
+  seek: ['Deliver measurable results', 'Execute effectively', 'Build systems that drive commercial growth'],
   ask: 'Apply to be considered.',
   deadline: 'Applications close Friday, 23 October 2026, at 11:59 PM WAT.',
 }
@@ -236,4 +247,62 @@ export const FINAL = {
   ],
   support:
     'The application form will ask about your experience, results, capabilities, costs, and proposed execution approach. Kindly fill Nil for places with no answer.',
+}
+
+export const TERMS = {
+  title: 'CycleBreeze Commercial Growth Challenge: Terms & Conditions',
+  items: [
+    {
+      head: 'Eligibility',
+      body: 'Open to sales and marketing firms (Track A) and individual professionals (Track B). Applicants must give accurate information and may be asked for references or evidence.',
+    },
+    {
+      head: 'Selection',
+      body: 'CycleBreeze will select up to 10 firms and up to 10 individuals, and may select fewer. Applying does not guarantee selection, an engagement or a contract.',
+    },
+    {
+      head: 'Trial',
+      body: 'Selected participants complete a 14-day trial. CycleBreeze may adjust the duration and will notify participants in writing.',
+    },
+    {
+      head: 'Trial allocation',
+      body: 'It is an advance for approved trial expenses only, not salary or a fee. It is released after a written budget is approved. Participants must reconcile spend with receipts within 3 working days after the trial and return unspent funds within 5 working days.',
+    },
+    {
+      head: 'No spending without approval',
+      body: 'Participants must not spend funds, contact customers, launch campaigns, use CycleBreeze or client data, or make public claims for CycleBreeze without written approval and an agreed scope.',
+    },
+    {
+      head: 'Costs',
+      body: 'Applicants must state separately what they will do with no additional professional fee, what needs media spend, and what needs third-party costs. Spend is never presented as free.',
+    },
+    {
+      head: 'Honesty and integrity',
+      body: 'No fake metrics, edited screenshots, bought followers or engagement, or unlawful messaging. CycleBreeze may verify claims and disqualify misleading submissions. Integrity breaches override any score.',
+    },
+    {
+      head: 'Data and privacy',
+      body: 'Applicant information is used only to evaluate the challenge and is seen only by authorized reviewers. Participants must follow privacy, consent and platform rules and keep all data confidential.',
+    },
+    {
+      head: 'Access',
+      body: 'CycleBreeze grants role-based, minimum-permission, time-limited access. Participants must never share or request passwords. Access ends within 24 hours of closeout.',
+    },
+    {
+      head: 'Ownership',
+      body: 'Trial-created assets, campaign data and leads are owned as agreed in writing before the trial begins. Participants must hand over editable assets and reports at closeout.',
+    },
+    {
+      head: 'Evaluation',
+      body: 'Participants are scored on results and execution quality using CycleBreeze’s rubric, and decisions are final.',
+    },
+    {
+      head: 'No guarantee of work',
+      body: 'Strong performers may be considered for employment, a contract, a retainer, specialist work or a longer pilot, with commission where applicable. Nothing is promised. Any engagement requires a separate written agreement.',
+    },
+    {
+      head: 'Changes',
+      body: 'CycleBreeze may update these terms, the timeline or the process, and will notify affected participants.',
+    },
+  ],
 }

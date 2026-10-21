@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Menu, Minus, Plus, X } from 'lucide-react'
+import { Check, Menu, Minus, Plus, X } from 'lucide-react'
 import ApplicationForm from './ApplicationForm.jsx'
 import {
   CONFIG,
@@ -14,6 +14,7 @@ import {
   NOT_FOR,
   NOT_FOR_CLOSE,
   PROBLEM,
+  TERMS,
   TIMELINE,
 } from './content.js'
 import { useNow, useReveal } from './hooks.js'
@@ -21,7 +22,10 @@ import { ApplyButton, BizzieLogo, Headline, Icon, Scallop, Stamp, Sticker } from
 
 const DEADLINE = new Date(CONFIG.deadline).getTime()
 const REDUCED = typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches
-const ON_SUBMIT = typeof window !== 'undefined' && window.location.pathname.replace(/\/+$/, '') === '/submit'
+const PATH = typeof window !== 'undefined' ? window.location.pathname.replace(/\/+$/, '') : ''
+const ON_SUBMIT = PATH === '/submit'
+const ON_TERMS = PATH === '/terms'
+const ON_SUBPAGE = ON_SUBMIT || ON_TERMS
 
 /* ---------------- Loader: ink screen that bursts into cream clouds ---------------- */
 
@@ -61,13 +65,13 @@ function Loader() {
 /* ---------------- Header ---------------- */
 
 function Header({ closed }) {
-  // On /submit the section anchors live on the home page.
-  const base = ON_SUBMIT ? '/' : ''
+  // On /submit and /terms the section anchors live on the home page.
+  const base = ON_SUBPAGE ? '/' : ''
   const [open, setOpen] = useState(false)
   return (
     <header className={`kz-header ${open ? 'is-open' : ''}`}>
       <div className="container hdr">
-        <a href={ON_SUBMIT ? '/' : '#top'} className="hdr-logo" aria-label="CycleBreeze home">
+        <a href={ON_SUBPAGE ? '/' : '#top'} className="hdr-logo" aria-label="CycleBreeze home">
           <img src="/brand/cyclebreeze-logo.webp" alt="CycleBreeze" width="600" height="183" />
         </a>
         <div className="hdr-right">
@@ -126,10 +130,34 @@ function Hero({ closed, now }) {
           {HERO.badge}
         </p>
         <Headline as="h1" className="hero-title" text={HERO.title} />
-        <div className="hero-copy intro" style={{ '--n': 3 }}>
-          {HERO.intro.map((t) => (
-            <p key={t}>{t}</p>
+        <p className="hero-sub intro" style={{ '--n': 3 }}>
+          {HERO.subtitle}
+        </p>
+        <p className="hero-lede intro" style={{ '--n': 4 }}>
+          {HERO.lede}
+        </p>
+        <ol className="hero-path intro" style={{ '--n': 5 }}>
+          {HERO.path.map((p) => (
+            <li key={p.step}>
+              <span className="hp-icon">
+                <Icon name={p.icon} size={18} />
+              </span>
+              <span className="hp-step">Step {p.step}</span>
+              <b>{p.title}</b>
+              <span>{p.body}</span>
+            </li>
           ))}
+        </ol>
+        <div className="hero-seek intro" style={{ '--n': 6 }}>
+          <p>{HERO.seekLead}</p>
+          <ul>
+            {HERO.seek.map((q) => (
+              <li key={q}>
+                <Check size={15} strokeWidth={3} aria-hidden="true" />
+                {q}
+              </li>
+            ))}
+          </ul>
         </div>
         <p className="hero-ask intro" style={{ '--n': 7 }}>
           {HERO.ask}
@@ -478,6 +506,9 @@ function Footer() {
       <div className="footer-contact">
         <a href={`mailto:${CONFIG.email}`}>{CONFIG.email}</a>
         <p>
+          <a href="/terms">Terms &amp; Conditions</a>
+        </p>
+        <p>
           Application contact ·{' '}
           <a href={CONFIG.website} target="_blank" rel="noreferrer">
             www.cyclebreeze.com
@@ -559,6 +590,44 @@ function Submit({ closed }) {
   )
 }
 
+/* ---------------- Terms & Conditions: its own plain page ---------------- */
+
+function Terms({ closed }) {
+  useEffect(() => {
+    document.title = 'Terms & Conditions · CycleBreeze Commercial Growth Challenge'
+  }, [])
+  return (
+    <>
+      <a className="skip-link" href="#main">
+        Skip to content
+      </a>
+      <Header closed={closed} />
+      <main id="main" className="terms-page">
+        <div className="container terms">
+          <a className="terms-back" href="/">
+            ← Back to the challenge
+          </a>
+          <h1 className="terms-title">{TERMS.title}</h1>
+          <ol className="terms-list">
+            {TERMS.items.map((t) => (
+              <li key={t.head}>
+                <h2>{t.head}</h2>
+                <p>{t.body}</p>
+              </li>
+            ))}
+          </ol>
+          <p className="terms-contact">
+            Questions about these terms? <a href={`mailto:${CONFIG.email}`}>{CONFIG.email}</a>
+          </p>
+        </div>
+        <div className="terms-foot">
+          <Footer />
+        </div>
+      </main>
+    </>
+  )
+}
+
 export default function App() {
   const now = useNow()
   const closed = now > DEADLINE
@@ -570,6 +639,7 @@ export default function App() {
   }, [])
 
   if (ON_SUBMIT) return <Submit closed={closed} />
+  if (ON_TERMS) return <Terms closed={closed} />
 
   return (
     <>

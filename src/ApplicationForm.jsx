@@ -82,6 +82,12 @@ function Field({ field, values, error, onChange }) {
           </span>
           <span>{label}</span>
         </label>
+        {field.link && (
+          // New tab, so reading the terms never loses a half-filled form.
+          <a className="check-link" href={field.link.href} target="_blank" rel="noreferrer">
+            {field.link.label} ↗
+          </a>
+        )}
         {err}
       </div>
     )

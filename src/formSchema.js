@@ -321,7 +321,8 @@ export const STEPS = [
         id: 'confirmTerms',
         type: 'checkbox',
         label:
-          'I have read the Important Information for Applicants, and I understand that applying does not guarantee selection, a trial allocation, or a long-term engagement.',
+          'I have read and agree to the Terms & Conditions, and I understand that applying does not guarantee selection, a trial allocation, or a long-term engagement.',
+        link: { href: '/terms', label: 'Read the Terms & Conditions' },
         required: true,
         sheet: 'Confirms trial conditions',
       },
