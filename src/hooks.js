@@ -62,32 +62,3 @@ export function useReveal() {
     return () => io.disconnect()
   }, [])
 }
-
-// Counts from 0 to `to` once the element is on screen.
-export function useCountUp(to, duration = 1400) {
-  const ref = useRef(null)
-  const [reduced] = useState(() => window.matchMedia('(prefers-reduced-motion: reduce)').matches)
-  const [value, setValue] = useState(reduced ? to : 0)
-  useEffect(() => {
-    const el = ref.current
-    if (!el || reduced) return
-    let frame = 0
-    const io = new IntersectionObserver(([e]) => {
-      if (!e.isIntersecting) return
-      io.disconnect()
-      const start = performance.now()
-      const tick = (t) => {
-        const k = clamp((t - start) / duration)
-        setValue(Math.round(to * (1 - Math.pow(1 - k, 3))))
-        if (k < 1) frame = requestAnimationFrame(tick)
-      }
-      frame = requestAnimationFrame(tick)
-    })
-    io.observe(el)
-    return () => {
-      io.disconnect()
-      cancelAnimationFrame(frame)
-    }
-  }, [to, duration, reduced])
-  return [ref, value]
-}

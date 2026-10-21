@@ -2,7 +2,7 @@
 // Every field becomes one column in the Google Sheet, headed by its `sheet` label (or `label`).
 //
 // Field shape: { id, type, label, help?, required?, options?, when?(values), sheet? }
-// Types: text, email, tel, url, number, date, textarea, select, radio, ratings, checkbox, fieldset.
+// Types: text, email, tel, url, number, date, textarea, select, radio, multiselect, ratings, checkbox, fieldset.
 
 export const TRACK_OPTIONS = [
   { value: 'individual', label: 'Individual professional' },
@@ -29,6 +29,7 @@ export const CAPABILITIES = [
   'CRM',
   'Automation',
   'AI-enabled workflows',
+  'AI marketing automation',
   'Sales leadership',
   'SOP development',
 ]
@@ -142,47 +143,6 @@ export const STEPS = [
       },
       { id: 'yearsOperating', type: 'number', label: 'Years operating', min: 0, required: (v) => v.track === 'firm', half: true, when: isFirmLike },
       { id: 'teamSize', type: 'number', label: 'Team size', min: 1, required: (v) => v.track === 'firm', half: true, when: isFirmLike },
-      { id: 'accountLead', type: 'text', label: 'Proposed account lead', required: (v) => v.track === 'firm', half: true, when: isFirmLike },
-      {
-        id: 'deliveryTeam',
-        type: 'textarea',
-        rows: 3,
-        label: 'Proposed delivery team',
-        help: 'Names, roles, and availability of each person.',
-        required: (v) => v.track === 'firm',
-        when: isFirmLike,
-      },
-      { id: 'availabilityHeading', type: 'heading', label: 'Availability' },
-      { id: 'startDate', type: 'date', label: 'Earliest start date', required: true, half: true },
-      {
-        id: 'capacity',
-        type: 'select',
-        label: 'Weekly capacity',
-        required: true,
-        half: true,
-        options: ['Under 10 hours', '10 to 20 hours', '20 to 30 hours', '30 to 40 hours', 'More than 40 hours'],
-      },
-      {
-        id: 'timezone',
-        type: 'text',
-        label: 'Time zone constraints',
-        help: 'Leave blank if you can work within West Africa Time (WAT) business hours.',
-      },
-      {
-        id: 'engagementModel',
-        type: 'select',
-        label: 'Preferred engagement model',
-        required: true,
-        options: [
-          'Full time role',
-          'Part time role',
-          'Fixed term contract',
-          'Monthly retainer',
-          'Commission or performance based',
-          'Agency service contract',
-          'Open to discussion',
-        ],
-      },
     ],
   },
   {
@@ -201,14 +161,6 @@ export const STEPS = [
         label: 'One underperforming initiative and the lessons you learned',
         required: true,
       },
-      {
-        id: 'references',
-        type: 'select',
-        label: 'Can you provide references or anonymised evidence?',
-        required: true,
-        options: ['References and anonymised evidence', 'References only', 'Anonymised evidence only', 'Neither at this time'],
-      },
-      { id: 'referencesNote', type: 'textarea', rows: 2, label: 'Notes on references or evidence (optional)' },
     ],
   },
   {
@@ -233,6 +185,13 @@ export const STEPS = [
         rows: 4,
         label: 'Tools you own, subscribe to, can access through partners, or would need CycleBreeze to fund',
         required: true,
+      },
+      {
+        id: 'marketingTools',
+        type: 'multiselect',
+        label: 'Marketing tools you are familiar with',
+        help: 'Select all that apply.',
+        options: ['Apollo', 'PressOne', 'Zoho CRM', 'Sales Navigator'],
       },
       {
         id: 'relationships',
@@ -397,7 +356,7 @@ export function validateStep(step, values) {
       if (isRequired(f, values) && missing.length) errors[f.id] = `Please rate every capability (${missing.length} left).`
       continue
     }
-    const empty = f.type === 'checkbox' ? !v : v == null || String(v).trim() === ''
+    const empty = f.type === 'checkbox' ? !v : f.type === 'multiselect' ? !v?.length : v == null || String(v).trim() === ''
     if (empty) {
       if (isRequired(f, values)) errors[f.id] = f.type === 'checkbox' ? 'Please confirm to continue.' : 'This field is required.'
       continue
@@ -424,6 +383,7 @@ export function toSheetRow(values) {
       let v = isShown(f, values) ? values[f.id] ?? '' : ''
       if (f.id === 'track') v = TRACK_OPTIONS.find((o) => o.value === v)?.label ?? v
       if (f.type === 'checkbox') v = v ? 'Yes' : 'No'
+      if (f.type === 'multiselect') v = Array.isArray(v) ? v.join(', ') : ''
       row.push([f.sheet ?? f.label, v])
     }
   }

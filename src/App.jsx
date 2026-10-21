@@ -1,30 +1,20 @@
-import { useEffect, useRef, useState } from 'react'
-import { Check, CircleCheck, Menu, Plus, X } from 'lucide-react'
+import { useEffect, useState } from 'react'
+import { Menu, Plus, X } from 'lucide-react'
 import ApplicationForm from './ApplicationForm.jsx'
 import {
   CONFIG,
-  DEAL,
   FAQS,
   FINAL,
-  GATES,
   HERO,
-  HERO_CARDS,
-  JUDGING,
-  LANES,
   MANDATES,
   MANDATES_HEAD,
   NAV,
   NOT_FOR,
   NOT_FOR_CLOSE,
   PROBLEM,
-  RULES,
-  STICKERS,
   TIMELINE,
-  TRACKS,
-  TRACKS_HEAD,
-  VERIFIED_VALUE,
 } from './content.js'
-import { useCountUp, useNow, useReveal, useScrollProgress } from './hooks.js'
+import { useNow, useReveal, useScrollProgress } from './hooks.js'
 import { ApplyButton, Headline, Icon, Scallop, Stamp, Sticker } from './ui.jsx'
 
 const DEADLINE = new Date(CONFIG.deadline).getTime()
@@ -93,16 +83,7 @@ function Header({ closed }) {
   )
 }
 
-/* ---------------- Hero: fanned cards straighten on scroll ---------------- */
-
-const FAN = [
-  { fx: 62, fy: 34, fr: -7 },
-  { fx: 37, fy: 6, fr: -3 },
-  { fx: 12, fy: 20, fr: 2 },
-  { fx: -12, fy: 2, fr: -2 },
-  { fx: -37, fy: 24, fr: 4 },
-  { fx: -62, fy: 0, fr: 7 },
-]
+/* ---------------- Hero ---------------- */
 
 function Countdown({ now }) {
   const left = Math.max(0, DEADLINE - now)
@@ -119,9 +100,8 @@ function Countdown({ now }) {
 }
 
 function Hero({ closed, now }) {
-  const ref = useScrollProgress((r) => -r.top / 520)
   return (
-    <section className="hero" id="top" ref={ref}>
+    <section className="hero" id="top">
       <svg className="hero-cloud" viewBox="0 0 1440 760" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
         {[
           [720, 330, 360],
@@ -150,11 +130,9 @@ function Hero({ closed, now }) {
         <p className="hero-sub intro" style={{ '--n': 3 }}>
           {HERO.subtitle}
         </p>
-        {HERO.lede.map((p, i) => (
-          <p className={`hero-lede intro ${i === 0 ? 'is-question' : ''}`} style={{ '--n': 4 }} key={p}>
-            {p}
-          </p>
-        ))}
+        <p className="hero-lede intro" style={{ '--n': 4 }}>
+          {HERO.lede}
+        </p>
         <div className="hero-cta intro" style={{ '--n': 5 }}>
           <ApplyButton closed={closed} label="Apply Now" />
           <a className="kz-btn outline" href="#problem">
@@ -165,26 +143,6 @@ function Hero({ closed, now }) {
         <p className="hero-deadline intro" style={{ '--n': 5 }}>
           {HERO.deadline}
         </p>
-      </div>
-      <div className="fan">
-        {HERO_CARDS.map((c, i) => (
-          <figure
-            className={`fan-card ${c.dark ? 'is-dark' : ''}`}
-            key={c.caption}
-            style={{ '--i': i, '--fx': FAN[i].fx, '--fy': FAN[i].fy, '--fr': FAN[i].fr }}
-          >
-            <div className="fan-inner">
-              {c.img ? (
-                <img src={c.img} alt="" style={{ objectPosition: c.pos }} loading={i > 2 ? 'lazy' : 'eager'} />
-              ) : (
-                <div className={`fan-graphic tone-${c.tone}`}>
-                  <Sticker icon={c.icon} tone={c.tone === 'green' ? 'ink' : 'green'} />
-                </div>
-              )}
-              <figcaption>{c.caption}</figcaption>
-            </div>
-          </figure>
-        ))}
       </div>
     </section>
   )
@@ -200,16 +158,6 @@ function Problem({ closed }) {
         <div data-reveal>
           <Headline text={PROBLEM.title} className="center" />
           <p className="section-lede center">{PROBLEM.intro}</p>
-        </div>
-        <div className="poster" data-reveal>
-          <img src="/photos/team.webp" alt="Two CycleBreeze teammates reviewing work on a monitor" loading="lazy" />
-          <div className="poster-ad">
-            <img src="/brand/cyclebreeze-logo-white.webp" alt="" width="700" height="213" />
-            <p className="poster-kicker">{PROBLEM.poster.kicker}</p>
-            <p className="poster-line">{PROBLEM.poster.line1}</p>
-            <p className="poster-script">{PROBLEM.poster.line2}</p>
-            <span className="poster-url">cyclebreeze.com/sales-competition</span>
-          </div>
         </div>
         <div className="bites" ref={ref}>
           {PROBLEM.cards.map((c, i) => (
@@ -284,7 +232,7 @@ function Mandates({ closed }) {
   )
 }
 
-/* ---------------- Not for: scalloped quote badges over a blurred photo ---------------- */
+/* ---------------- What we look for: quality cards over a blurred photo ---------------- */
 
 function NotFor({ closed }) {
   return (
@@ -295,16 +243,14 @@ function NotFor({ closed }) {
           <Headline text={'What we *look* for'} className="center light" />
           <Sticker icon="zap" tone="green" className="notfor-zap" />
         </div>
-        <div className="badges">
+        <div className="qualities">
           {NOT_FOR.map((q, i) => (
-            <Scallop className={`quote-badge q${i}`} key={q.who} style={{ '--i': i }} data-reveal>
-              <span className="qmark" aria-hidden="true">
-                ”
-              </span>
+            <article className="quality" key={q.who} style={{ '--i': i }} data-reveal>
+              <span className="quality-num">{String(i + 1).padStart(2, '0')}</span>
+              <h3>{q.who}</h3>
               <p>{q.quote}</p>
-              <strong>{q.who}</strong>
-              <span className="quote-note">{q.note}</span>
-            </Scallop>
+              <span className="quality-note">{q.note}</span>
+            </article>
           ))}
         </div>
         <p className="notfor-close" data-reveal>
@@ -319,20 +265,6 @@ function NotFor({ closed }) {
 }
 
 /* ---------------- Deal at a glance (Krackerz "Meet Penny") ---------------- */
-
-function StatTile({ stat, i }) {
-  const [ref, v] = useCountUp(stat.n)
-  return (
-    <div className={`stat-tile c${i}`} ref={ref} data-reveal style={{ '--i': i }}>
-      <strong>
-        {stat.prefix}
-        {v}
-        {stat.suffix}
-      </strong>
-      <span>{stat.label}</span>
-    </div>
-  )
-}
 
 function Deal({ now }) {
   // Step 1 is current while applications are open; screening follows the deadline.
@@ -353,11 +285,6 @@ function Deal({ now }) {
             <Sticker icon="rocket" tone="green" className="deal-sticker" />
           </div>
           <div className="deal-info">
-            <div className="stat-tiles">
-              {DEAL.stats.map((s, i) => (
-                <StatTile stat={s} i={i} key={s.label} />
-              ))}
-            </div>
             <ol className="deal-table">
               {TIMELINE.map((t, i) => (
                 <li key={t.stage} className={i === current ? 'is-now' : ''}>
@@ -382,71 +309,9 @@ function Deal({ now }) {
   )
 }
 
-/* ---------------- Tracks (Krackerz pricing) ---------------- */
+/* ---------------- Live trial band (Krackerz partner band) ---------------- */
 
-function Tracks({ closed }) {
-  const [view, setView] = useState('get')
-  return (
-    <section className="tracks" id="tracks">
-      <div className="container">
-        <div className="section-head" data-reveal>
-          <Stamp>{TRACKS_HEAD.stamp}</Stamp>
-          <Headline text={TRACKS_HEAD.title} className="center" />
-        </div>
-        <div className="toggle" data-reveal>
-          <span className={view === 'get' ? 'on' : ''}>{TRACKS_HEAD.getLabel}</span>
-          <button
-            role="switch"
-            aria-checked={view === 'take'}
-            aria-label="Show what to prepare for each track"
-            onClick={() => setView((v) => (v === 'get' ? 'take' : 'get'))}
-          >
-            <span />
-          </button>
-          <span className={view === 'take' ? 'on' : ''}>{TRACKS_HEAD.takeLabel}</span>
-        </div>
-        <div className="tracks-grid">
-          {TRACKS.map((t, i) => (
-            <article className={`track ${t.featured ? 'is-featured' : ''}`} key={t.id} data-reveal style={{ '--i': i }}>
-              <div className="track-top">
-                <div>
-                  <h3>{t.name}</h3>
-                  <p>{t.sub}</p>
-                </div>
-                <span className="save">{t.save}</span>
-              </div>
-              <p className="track-price">
-                {t.price}
-                {t.unit && <small>/ {t.unit}</small>}
-              </p>
-              {t.id !== 'runners' ? (
-                <ApplyButton closed={closed} className="track-btn" variant={t.featured ? '' : 'outline'} label="Apply now" />
-              ) : (
-                <a className="kz-btn outline track-btn" href="#rules">
-                  Read the rules
-                </a>
-              )}
-              <ul key={view} className="track-list">
-                {(view === 'get' ? t.get : t.take).map((p) => (
-                  <li key={p}>
-                    <CircleCheck size={17} aria-hidden="true" />
-                    {p}
-                  </li>
-                ))}
-              </ul>
-            </article>
-          ))}
-          <Sticker icon="trophy" tone="green" className="tracks-sticker" />
-        </div>
-        <p className="fine-print center">{TRACKS_HEAD.fine}</p>
-      </div>
-    </section>
-  )
-}
-
-/* ---------------- Live trial band (Krackerz partner band) + verified value ---------------- */
-
-function Trial() {
+function Trial({ closed }) {
   return (
     <section className="trial" id="trial">
       <div className="container">
@@ -467,68 +332,8 @@ function Trial() {
           <img className="band-photo p1" src="/photos/team.webp" alt="" loading="lazy" />
           <img className="band-photo p2" src="/photos/bizzie.webp" alt="" loading="lazy" />
           <img className="band-photo p3" src="/photos/developer.webp" alt="" loading="lazy" />
-          <a className="kz-btn band-cta" href="#value">
-            Before you apply
-          </a>
+          <ApplyButton closed={closed} className="band-cta" />
         </div>
-
-        <div className="value" id="value">
-          <div className="value-head" data-reveal>
-            <Stamp>Before you apply</Stamp>
-            <Headline text={'What to have\n*ready*'} />
-            <p>
-              Applicants should be ready to provide the following. The full requirements will be collected through the
-              application form. For firms, the application should also identify the proposed account lead, delivery team,
-              roles, availability, and relevant evidence of results.
-            </p>
-            <div className="lane-chips">
-              {LANES.map((l) => (
-                <span key={l}>{l}</span>
-              ))}
-            </div>
-          </div>
-          <ol className="value-table">
-            {VERIFIED_VALUE.map((v, i) => (
-              <li key={v.outcome} data-reveal style={{ '--i': i }}>
-                <span className="vt-outcome">{v.outcome}</span>
-                <span className="vt-how">{v.how}</span>
-                <span className="vt-value">{v.value}</span>
-              </li>
-            ))}
-          </ol>
-        </div>
-
-        <div className="rules-grid">
-          {RULES.map((r, i) => (
-            <article className={`rule-card c${i}`} key={r.title} data-reveal style={{ '--i': i }}>
-              <h3>{r.title}</h3>
-              <p>{r.body}</p>
-            </article>
-          ))}
-          <article className="gate-card" data-reveal style={{ '--i': 4 }}>
-            <h3>Written approval first</h3>
-            <p className="gate-intro">Without written approval and an agreed scope, applicants must not:</p>
-            <ul>
-              {GATES.map((g) => (
-                <li key={g}>
-                  <Check size={15} aria-hidden="true" /> {g}
-                </li>
-              ))}
-            </ul>
-          </article>
-        </div>
-        <div className="judging" data-reveal>
-          <span className="judging-label">Trial performance assessed on</span>
-          {JUDGING.map((j) => (
-            <span className="judging-chip" key={j}>
-              {j}
-            </span>
-          ))}
-        </div>
-        <p className="fine-print center">
-          CycleBreeze may verify references, request demonstrations or supporting evidence, and disqualify misleading
-          submissions.
-        </p>
       </div>
     </section>
   )
@@ -554,11 +359,12 @@ function Faq() {
             Still stuck? <a href={`mailto:${CONFIG.email}`}>{CONFIG.email}</a>
           </p>
         </div>
-        <div className="faq-list">
+        {/* Reveal on the list, not the items: toggling an item's className would drop the observer's is-in class. */}
+        <div className="faq-list" data-reveal>
           {FAQS.map((f, i) => {
             const isOpen = open === i
             return (
-              <div className={`faq-item ${isOpen ? 'is-open' : ''}`} key={f.q} data-reveal style={{ '--i': i }}>
+              <div className={`faq-item ${isOpen ? 'is-open' : ''}`} key={f.q}>
                 <h3>
                   <button aria-expanded={isOpen} aria-controls={`faq-${i}`} id={`faq-q-${i}`} onClick={() => setOpen(isOpen ? -1 : i)}>
                     {f.q}
@@ -576,113 +382,6 @@ function Faq() {
             )
           })}
         </div>
-      </div>
-    </section>
-  )
-}
-
-/* ---------------- Rules: draggable laptop stickers (Krackerz "Work in style") ---------------- */
-
-function useTyped(text, speed = 28) {
-  const [typed, setTyped] = useState({ text, n: 0 })
-  if (typed.text !== text) setTyped({ text, n: 0 })
-  useEffect(() => {
-    if (REDUCED) return
-    let n = 0
-    const id = setInterval(() => {
-      n += 1
-      setTyped({ text, n })
-      if (n >= text.length) clearInterval(id)
-    }, speed)
-    return () => clearInterval(id)
-  }, [text, speed])
-  return REDUCED ? text : text.slice(0, typed.n)
-}
-
-function Laptop() {
-  const lidRef = useRef(null)
-  const [pos, setPos] = useState(() => Object.fromEntries(STICKERS.map((s) => [s.id, { x: s.x, y: s.y }])))
-  const [order, setOrder] = useState(STICKERS.map((s) => s.id))
-  const [message, setMessage] = useState('Drag the stickers — tap one to read the rule')
-  const typed = useTyped(message)
-  const drag = useRef(null)
-
-  const front = (id) => setOrder((o) => [...o.filter((x) => x !== id), id])
-
-  const onDown = (e, id) => {
-    const lid = lidRef.current.getBoundingClientRect()
-    const el = e.currentTarget.getBoundingClientRect()
-    drag.current = { id, dx: e.clientX - el.left, dy: e.clientY - el.top, lid, w: el.width, h: el.height, moved: 0, sx: e.clientX, sy: e.clientY }
-    e.currentTarget.setPointerCapture(e.pointerId)
-    front(id)
-  }
-  const onMove = (e) => {
-    const d = drag.current
-    if (!d) return
-    d.moved = Math.max(d.moved, Math.hypot(e.clientX - d.sx, e.clientY - d.sy))
-    const x = ((e.clientX - d.lid.left - d.dx) / d.lid.width) * 100
-    const y = ((e.clientY - d.lid.top - d.dy) / d.lid.height) * 100
-    const maxX = 100 - (d.w / d.lid.width) * 100
-    const maxY = 100 - (d.h / d.lid.height) * 100
-    setPos((p) => ({ ...p, [d.id]: { x: Math.min(Math.max(x, 0), maxX), y: Math.min(Math.max(y, 0), maxY) } }))
-  }
-  const onUp = () => {
-    const d = drag.current
-    drag.current = null
-    if (d && d.moved < 5) setMessage(STICKERS.find((s) => s.id === d.id).rule)
-  }
-  const onKey = (e, s) => {
-    if (e.key === 'Enter' || e.key === ' ') {
-      e.preventDefault()
-      setMessage(s.rule)
-      return
-    }
-    const step = { ArrowLeft: [-3, 0], ArrowRight: [3, 0], ArrowUp: [0, -4], ArrowDown: [0, 4] }[e.key]
-    if (!step) return
-    e.preventDefault()
-    front(s.id)
-    setPos((p) => ({ ...p, [s.id]: { x: Math.min(Math.max(p[s.id].x + step[0], 0), 80), y: Math.min(Math.max(p[s.id].y + step[1], 0), 82) } }))
-  }
-
-  return (
-    <div className="laptop" data-reveal>
-      <p className="laptop-pill" aria-live="polite">
-        <span>{typed}</span>
-        <span className="caret" aria-hidden="true" />
-      </p>
-      <div className="lid" ref={lidRef}>
-        <img className="lid-logo" src="/brand/cb-mark.png" alt="" />
-        {STICKERS.map((s) => (
-          <button
-            type="button"
-            key={s.id}
-            className={`lap-sticker kind-${s.kind} tone-${s.tone}`}
-            style={{ left: `${pos[s.id].x}%`, top: `${pos[s.id].y}%`, '--r': `${s.r}deg`, zIndex: order.indexOf(s.id) + 1 }}
-            onPointerDown={(e) => onDown(e, s.id)}
-            onPointerMove={onMove}
-            onPointerUp={onUp}
-            onPointerCancel={() => (drag.current = null)}
-            onKeyDown={(e) => onKey(e, s)}
-            aria-label={`${s.rule} Sticker — drag, or use arrow keys to move.`}
-          >
-            {s.kind === 'text' ? s.text : <Sticker icon={s.icon} text={s.icon === 'free' ? 'FREE' : undefined} tone={s.tone} />}
-          </button>
-        ))}
-      </div>
-    </div>
-  )
-}
-
-function Rules() {
-  return (
-    <section className="rules bumps" id="rules">
-      <div className="rules-bg" aria-hidden="true" />
-      <div className="container rules-inner">
-        <div className="section-head" data-reveal>
-          <Headline text={'Integrity as much\nas [performance]'} className="center light" />
-          <p className="script-sub light">the rules we play by</p>
-        </div>
-        <Laptop />
       </div>
     </section>
   )
@@ -787,10 +486,8 @@ export default function App() {
         <Mandates closed={closed} />
         <NotFor closed={closed} />
         <Deal now={now} />
-        <Tracks closed={closed} />
-        <Trial />
+        <Trial closed={closed} />
         <Faq />
-        <Rules />
         <Final closed={closed} />
       </main>
     </>

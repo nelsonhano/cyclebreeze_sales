@@ -105,6 +105,26 @@ function Field({ field, values, error, onChange }) {
     )
   }
 
+  if (field.type === 'multiselect') {
+    const picked = Array.isArray(values[field.id]) ? values[field.id] : []
+    const toggle = (o) => onChange(field.id, picked.includes(o) ? picked.filter((x) => x !== o) : [...picked, o])
+    return (
+      <fieldset className={`field ${error ? 'has-error' : ''}`} aria-describedby={describedBy} id={id}>
+        <legend className="field-label">{label}</legend>
+        {help}
+        <div className="choice-row">
+          {field.options.map((o) => (
+            <label className={`choice ${picked.includes(o) ? 'is-on' : ''}`} key={o}>
+              <input type="checkbox" name={field.id} value={o} checked={picked.includes(o)} onChange={() => toggle(o)} />
+              {o}
+            </label>
+          ))}
+        </div>
+        {err}
+      </fieldset>
+    )
+  }
+
   if (field.type === 'ratings') {
     const ratings = values[field.id] ?? {}
     return (
