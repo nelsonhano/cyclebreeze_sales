@@ -19,6 +19,7 @@ import { ApplyButton, Headline, Icon, Scallop, Stamp, Sticker } from './ui.jsx'
 
 const DEADLINE = new Date(CONFIG.deadline).getTime()
 const REDUCED = typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches
+const ON_SUBMIT = typeof window !== 'undefined' && window.location.pathname.replace(/\/+$/, '') === '/submit'
 
 /* ---------------- Loader: ink screen that bursts into cream clouds ---------------- */
 
@@ -58,22 +59,24 @@ function Loader() {
 /* ---------------- Header ---------------- */
 
 function Header({ closed }) {
+  // On /submit the section anchors live on the home page.
+  const base = ON_SUBMIT ? '/' : ''
   const [open, setOpen] = useState(false)
   return (
     <header className={`kz-header ${open ? 'is-open' : ''}`}>
       <div className="container hdr">
-        <a href="#top" className="hdr-logo" aria-label="CycleBreeze home">
+        <a href={ON_SUBMIT ? '/' : '#top'} className="hdr-logo" aria-label="CycleBreeze home">
           <img src="/brand/cyclebreeze-logo.webp" alt="CycleBreeze" width="600" height="183" />
         </a>
         <div className="hdr-right">
           <nav className="hdr-nav" aria-label="Primary">
             {NAV.map((n) => (
-              <a key={n.href} href={n.href} onClick={() => setOpen(false)}>
+              <a key={n.href} href={base + n.href} onClick={() => setOpen(false)}>
                 {n.label}
               </a>
             ))}
           </nav>
-          <ApplyButton closed={closed} className="hdr-cta" />
+          {!ON_SUBMIT && <ApplyButton closed={closed} className="hdr-cta" />}
           <button className="hdr-menu" aria-label={open ? 'Close menu' : 'Open menu'} aria-expanded={open} onClick={() => setOpen((o) => !o)}>
             {open ? <X size={20} /> : <Menu size={20} />}
           </button>
@@ -412,6 +415,35 @@ function cloudTop() {
   return d + 'L1440 300Z'
 }
 
+function Footer() {
+  return (
+    <footer className="container footer">
+      <div>
+        <img className="footer-logo" src="/brand/cyclebreeze-logo-white.webp" alt="CycleBreeze" width="700" height="213" loading="lazy" />
+        <p>CycleBreeze Commercial Growth Challenge.</p>
+      </div>
+      <div className="footer-contact">
+        <a href={`mailto:${CONFIG.email}`}>{CONFIG.email}</a>
+        <p>
+          Application contact ·{' '}
+          <a href={CONFIG.website} target="_blank" rel="noreferrer">
+            www.cyclebreeze.com
+          </a>
+        </p>
+      </div>
+      <div className="footer-base">
+        <span>
+          Powered by{' '}
+          <a href="https://cyclebreeze.com" target="_blank" rel="noreferrer">
+            CycleBreeze
+          </a>
+        </span>
+        <span>© {new Date(DEADLINE).getFullYear()} CycleBreeze. Lasting legacies.</span>
+      </div>
+    </footer>
+  )
+}
+
 function Final({ closed }) {
   return (
     <section className="final">
@@ -436,35 +468,41 @@ function Final({ closed }) {
           <ApplyButton closed={closed} label="Start Your Application" />
           <p className="final-support">{FINAL.support}</p>
         </div>
+        <Footer />
+      </div>
+    </section>
+  )
+}
+
+/* ---------------- /submit: the application form on its own page ---------------- */
+
+function Submit({ closed }) {
+  useEffect(() => {
+    document.title = 'Apply · CycleBreeze Commercial Growth Challenge'
+  }, [])
+  return (
+    <>
+      <a className="skip-link" href="#main">
+        Skip to content
+      </a>
+      <Header closed={closed} />
+      <main id="main" className="submit-page">
+        <div className="container submit-head">
+          <a className="submit-back" href="/">
+            ← Back to the challenge
+          </a>
+          <Headline as="h1" text={'Start your\n[application]'} className="center light" />
+          <p>
+            Application deadline: <b>{CONFIG.deadlineLabel}.</b>
+          </p>
+          <p className="final-support">{FINAL.support}</p>
+        </div>
         <div className="container final-form" id="apply">
           <ApplicationForm closed={closed} />
         </div>
-        <footer className="container footer">
-          <div>
-            <img className="footer-logo" src="/brand/cyclebreeze-logo-white.webp" alt="CycleBreeze" width="700" height="213" loading="lazy" />
-            <p>CycleBreeze Commercial Growth Challenge.</p>
-          </div>
-          <div className="footer-contact">
-            <a href={`mailto:${CONFIG.email}`}>{CONFIG.email}</a>
-            <p>
-              Application contact ·{' '}
-              <a href={CONFIG.website} target="_blank" rel="noreferrer">
-                www.cyclebreeze.com
-              </a>
-            </p>
-          </div>
-          <div className="footer-base">
-            <span>
-              Powered by{' '}
-              <a href="https://cyclebreeze.com" target="_blank" rel="noreferrer">
-                CycleBreeze
-              </a>
-            </span>
-            <span>© {new Date(DEADLINE).getFullYear()} CycleBreeze. Lasting legacies.</span>
-          </div>
-        </footer>
-      </div>
-    </section>
+        <Footer />
+      </main>
+    </>
   )
 }
 
@@ -472,6 +510,13 @@ export default function App() {
   const now = useNow()
   const closed = now > DEADLINE
   useReveal()
+
+  // Old links to the in-page form (/#apply) now land on /submit.
+  useEffect(() => {
+    if (!ON_SUBMIT && window.location.hash === '#apply') window.location.replace('/submit')
+  }, [])
+
+  if (ON_SUBMIT) return <Submit closed={closed} />
 
   return (
     <>

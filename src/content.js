@@ -3,8 +3,8 @@
 // Headline syntax: lines split on \n, *word* = script accent, [WORD] = tilted ink tag.
 
 export const CONFIG = {
-  // Every "Apply" button scrolls to the application form at the bottom of the page.
-  applyUrl: '#apply',
+  // Every "Apply" button opens the application form on its own route.
+  applyUrl: '/submit',
   // Google Apps Script web app URL that saves applications to the Google Sheet.
   // Setup steps live in docs/google-sheets-setup.md. Leave empty until it is deployed.
   formEndpoint: '',

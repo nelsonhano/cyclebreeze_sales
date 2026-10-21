@@ -1669,6 +1669,44 @@ button {
   color: rgba(255, 255, 255, 0.6);
 }
 
+/* ---------- /submit page ---------- */
+.submit-page {
+  min-height: 100vh;
+  padding: 130px 0 30px;
+  background: var(--ink);
+  color: var(--white);
+}
+.submit-head {
+  text-align: center;
+}
+.submit-head .kz-title {
+  --t: clamp(30px, 4.4vw, 64px);
+}
+.submit-head > p {
+  max-width: 560px;
+  margin: 22px auto 0;
+  color: rgba(255, 255, 255, 0.72);
+}
+.submit-head b {
+  color: var(--white);
+}
+.submit-head .final-support {
+  margin-top: 12px;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.6);
+}
+.submit-back {
+  display: inline-block;
+  margin-bottom: 26px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--green);
+  text-underline-offset: 4px;
+}
+.submit-page .footer {
+  margin-top: 80px;
+}
+
 /* ---------- Application form ---------- */
 .final-form {
   position: relative;
