@@ -125,7 +125,7 @@ export const NOT_FOR_CLOSE =
   'We value integrity as much as performance. Misleading claims, fabricated metrics, fake engagement, unauthorised use of data, and unapproved spending may result in disqualification.'
 
 export const GAINS_HEAD = {
-  stamp: 'What you stand to get',
+  stamp: 'What Awaits Candidates Selected After the Trial',
   title: 'More than a trial.\nBuild, grow and [earn]',
   close: 'Deliver results. Unlock opportunities. Grow with CycleBreeze.',
 }
@@ -207,7 +207,7 @@ export const FAQS = [
   },
   {
     q: 'What is the trial allocation?',
-    a: '₦100,000 for firms and agencies, and ₦50,000 for individual professionals. Trial allocations are available only to shortlisted applicants selected for trial execution, and are subject to the trial rules and an approved execution plan. They are separate from the prizes: the top performers in each track also win the rewards listed under “What you stand to get”.',
+    a: '₦100,000 for firms and agencies, and ₦50,000 for individual professionals. Trial allocations are available only to shortlisted applicants selected for trial execution, and are subject to the trial rules and an approved execution plan. They are separate from the prizes: the top performers in each track also win the rewards listed under “What Awaits Candidates Selected After the Trial”.',
   },
   {
     q: 'How many applicants will be selected?',
