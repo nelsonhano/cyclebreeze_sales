@@ -129,6 +129,12 @@ function Hero({ closed, now }) {
         <h1 className="hero-badge intro" style={{ '--n': 0 }}>
           {HERO.badge}
         </h1>
+        <div className="hero-intro intro" style={{ '--n': 1 }}>
+          <p className="hero-lead">{HERO.lead}</p>
+          {HERO.sub.map((s) => (
+            <p key={s}>{s}</p>
+          ))}
+        </div>
         <ol className="hero-path intro" style={{ '--n': 3 }}>
           {HERO.path.map((p) => (
             <li key={p.step}>

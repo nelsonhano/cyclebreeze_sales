@@ -568,6 +568,24 @@ button {
   box-shadow: 0 6px 14px -6px rgba(14, 22, 32, 0.4);
 }
 /* The opportunity as three steps, connected left to right. */
+.hero-intro {
+  max-width: 720px;
+  margin: 30px auto 0;
+}
+.hero-intro p {
+  margin: 10px 0 0;
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--ink-soft);
+}
+.hero-intro .hero-lead {
+  margin: 0;
+  font-family: var(--f-display);
+  font-size: clamp(19px, 1.8vw, 22px);
+  font-weight: 700;
+  line-height: 1.35;
+  color: var(--b1);
+}
 .hero-path {
   position: relative;
   display: grid;

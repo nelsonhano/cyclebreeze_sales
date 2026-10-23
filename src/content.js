@@ -25,6 +25,11 @@ export const NAV = [
 
 export const HERO = {
   badge: 'Call for proposals',
+  lead: 'CycleBreeze is looking for a long-term sales and marketing partner.',
+  sub: [
+    'We invite qualified firms and individual professionals to take part in a performance-focused trial.',
+    'Submit a proposal so we can identify and build lasting partnerships with professionals and firms who can deliver measurable results, execute effectively and develop practical systems that drive commercial growth.',
+  ],
   // The opportunity, read left to right: prove it, earn it, run it.
   path: [
     { step: '01', title: 'Prove your expertise', body: 'Take part in a performance-focused trial.', icon: 'target' },
