@@ -656,37 +656,6 @@ button {
 .hero-path li:last-child > span:last-child {
   color: rgba(255, 255, 255, 0.88);
 }
-.hero-seek {
-  margin: 34px auto 0;
-}
-.hero-seek p {
-  font-size: 15.5px;
-  color: var(--ink-soft);
-}
-.hero-seek ul {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 10px;
-  margin: 12px 0 0;
-  padding: 0;
-  list-style: none;
-}
-.hero-seek li {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 9px 16px;
-  border-radius: 999px;
-  background: var(--white);
-  border: 1px solid var(--line);
-  font-size: 14.5px;
-  font-weight: 600;
-  color: var(--ink);
-}
-.hero-seek svg {
-  color: var(--green);
-}
 .hero-ask {
   margin: 34px auto 16px;
   font-family: var(--f-display);

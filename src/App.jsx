@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Check, Menu, Minus, Plus, X } from 'lucide-react'
+import { Menu, Minus, Plus, X } from 'lucide-react'
 import ApplicationForm from './ApplicationForm.jsx'
 import {
   CONFIG,
@@ -147,17 +147,6 @@ function Hero({ closed, now }) {
             </li>
           ))}
         </ol>
-        <div className="hero-seek intro" style={{ '--n': 4 }}>
-          <p>{HERO.seekLead}</p>
-          <ul>
-            {HERO.seek.map((q) => (
-              <li key={q}>
-                <Check size={15} strokeWidth={3} aria-hidden="true" />
-                {q}
-              </li>
-            ))}
-          </ul>
-        </div>
         <p className="hero-ask intro" style={{ '--n': 7 }}>
           {HERO.ask}
         </p>

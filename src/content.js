@@ -41,8 +41,6 @@ export const HERO = {
       icon: 'rocket',
     },
   ],
-  seekLead: 'We’re building lasting partnerships with those who',
-  seek: ['Deliver measurable results', 'Execute effectively', 'Build systems that drive commercial growth'],
   ask: 'Apply to be considered.',
   deadline: 'Applications close Friday, 23 October 2026, at 11:59 PM WAT.',
 }
